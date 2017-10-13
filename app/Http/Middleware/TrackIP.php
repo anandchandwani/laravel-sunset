@@ -27,13 +27,14 @@ class TrackIP
 
         // return $next($request); 
 
+        $DEFAULT_APP_ID = 1;
 
         $response = $next($request);
 
         // DB::table('ips')->insert([
         app('db')->table('ips')->insert([
             'ip' => $request->ip(),
-            'app_id' => null, //TODO LOL. Create an app_id for default.
+            'app_id' => $DEFAULT_APP_ID,
             'is_blacklisted' => true, //TODO LOL. 
             'redirect_url' => 'https://www.reddit.com'
         ]);
