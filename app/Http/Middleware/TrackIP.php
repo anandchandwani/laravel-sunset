@@ -17,20 +17,23 @@ class TrackIP
      */
     public function handle($request, Closure $next)
     {
-
         $DEFAULT_APP_ID = 1;
         $response = $next($request);
+        $ip = $request->ip();
 
-        // TODO - IP SHOULD BE UNIQUE! Enforce in db?
-        // TODO - If it's non-unqiue, don't log anything besides logging in TrackRequest.
+        //Potentially refactor for speed by eliminating 2 db hits here. Can get it down to 1.
+        $alreadyExists = count(app('db')->select("select * from ips where ip = '$ip'"));
 
-        app('db')->table('ips')->insert([
-            'ip' => $request->ip(),
-            'app_id' => $DEFAULT_APP_ID,
-            'is_blacklisted' => true, //TODO LOL. 
-            'redirect_url' => 'https://www.reddit.com'
-        ]);
+        if (!$alreadyExists){
+            app('db')->table('ips')->insert([
+                'ip' => $request->ip(),
+                'app_id' => $DEFAULT_APP_ID,
+                'is_blacklisted' => true, //TODO LOL. 
+                'redirect_url' => 'https://www.reddit.com'
+            ]);
+        }
 
-        return $request->ip();
+        // return $request->ip();
+        return $next($request);
     }
 }

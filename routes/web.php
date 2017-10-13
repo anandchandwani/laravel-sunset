@@ -57,4 +57,12 @@ $router->get('/darkcloud', function () use ($router) {
 });
 
 
+$router->get('/darkcloud/json', function () use ($router) {
+    return [
+        'apps' => app('db')->select("SELECT * FROM apps"),        
+        'ips' => app('db')->select("SELECT * FROM ips"),
+        'requests' => app('db')->select("SELECT * FROM requests")
+    ];
+});
+
 

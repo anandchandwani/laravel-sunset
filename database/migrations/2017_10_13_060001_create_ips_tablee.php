@@ -15,7 +15,7 @@ class CreateIpsTablee extends Migration
     {
         Schema::create('ips', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('ip'); //IP address of user
+            $table->string('ip')->unique(); //IP address of user
             $table->integer('app_id')->unsigned();
             $table->foreign('app_id')->references('id')->on('apps');
             $table->boolean('is_blacklisted')->nullable(); //null means option hasn't been made yet.
