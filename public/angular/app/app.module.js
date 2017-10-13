@@ -8,6 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var core_1 = require("@angular/core");
 var platform_browser_1 = require("@angular/platform-browser");
 var app_component_1 = require("./app.component");
+var ng2_smart_table_1 = require("ng2-smart-table");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -15,7 +16,7 @@ var AppModule = (function () {
 }());
 AppModule = __decorate([
     core_1.NgModule({
-        imports: [platform_browser_1.BrowserModule],
+        imports: [platform_browser_1.BrowserModule, ng2_smart_table_1.Ng2SmartTableModule],
         declarations: [app_component_1.AppComponent],
         bootstrap: [app_component_1.AppComponent]
     })
