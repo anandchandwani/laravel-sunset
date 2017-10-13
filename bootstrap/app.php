@@ -63,9 +63,10 @@ $app->singleton(
 //    App\Http\Middleware\ExampleMiddleware::class
 // ]);
 
-// $app->routeMiddleware([
-//     'auth' => App\Http\Middleware\Authenticate::class,
-// ]);
+$app->routeMiddleware([
+    'trackIP' => App\Http\Middleware\TrackIP::class,
+    'trackRequest' => App\Http\Middleware\TrackRequest::class,
+]);
 
 /*
 |--------------------------------------------------------------------------

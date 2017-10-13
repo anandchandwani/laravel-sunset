@@ -11,6 +11,16 @@
 |
 */
 
-$router->get('/', function () use ($router) {
+
+$router->get('/', ['middleware' => ['trackIP', 'trackRequest'], function () {
+    return "Hello, world.";
+}]);
+
+$router->get('/version', function () use ($router) {
     return $router->app->version();
 });
+
+$router->get('/ips', function () use ($router) {
+    return $results = app('db')->select("SELECT * FROM ips");
+});
+
