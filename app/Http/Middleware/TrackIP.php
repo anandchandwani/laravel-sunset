@@ -17,21 +17,13 @@ class TrackIP
      */
     public function handle($request, Closure $next)
     {
-        // $response = $next($request);
-
-        // // Perform action
-
-        // $results = app('db')->select("SELECT * FROM users");
-
-        // return $response;
-
-        // return $next($request); 
 
         $DEFAULT_APP_ID = 1;
-
         $response = $next($request);
 
-        // DB::table('ips')->insert([
+        // TODO - IP SHOULD BE UNIQUE! Enforce in db?
+        // TODO - If it's non-unqiue, don't log anything besides logging in TrackRequest.
+
         app('db')->table('ips')->insert([
             'ip' => $request->ip(),
             'app_id' => $DEFAULT_APP_ID,
@@ -39,12 +31,6 @@ class TrackIP
             'redirect_url' => 'https://www.reddit.com'
         ]);
 
-        //  if(!method_exists($response, 'render'))
-        //      return $response;
-
-        //  $content = $response->render(); 
-        // return $request->headers->all(); 
         return $request->ip();
-        //  return 'Doop';      
     }
 }

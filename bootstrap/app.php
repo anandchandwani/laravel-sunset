@@ -66,6 +66,7 @@ $app->singleton(
 $app->routeMiddleware([
     'trackIP' => App\Http\Middleware\TrackIP::class,
     'trackRequest' => App\Http\Middleware\TrackRequest::class,
+    'corsMiddleware' => App\Http\Middleware\CorsMiddleware::class,
 ]);
 
 /*
@@ -82,6 +83,7 @@ $app->routeMiddleware([
 // $app->register(App\Providers\AppServiceProvider::class);
 // $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
+$app->register(App\Providers\CatchAllOptionsRequestsProvider::class);
 
 /*
 |--------------------------------------------------------------------------
