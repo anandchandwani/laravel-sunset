@@ -14,9 +14,12 @@ class TrackIP
      * Plan:
      *  - Track IP BEFORE responding
      *  - Track requests AFTER responding
+     * 
+     * EDIT: NO NO NO! HAVE TO LOG AFTER CHANGES SO FIRST REQUEST ISN'T ALREADY LOGGED!
      */
     public function handle($request, Closure $next)
     {
+        $response = $next($request);
         $DEFAULT_APP_ID = 1;
         $response = $next($request);
         $ip = $request->ip();
@@ -34,6 +37,7 @@ class TrackIP
         }
 
         // return $request->ip();
-        return $next($request);
+        // return $next($request);
+        return $response;
     }
 }
