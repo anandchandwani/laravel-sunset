@@ -36,8 +36,6 @@ class TrackIP
             ]);
         }
 
-        // return $request->ip();
-        // return $next($request);
         return $response;
     }
 }

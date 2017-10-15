@@ -1,0 +1,1 @@
+* Need ability to toggle whether it's in "listening only" mode. This should be app specific setting.  No redirects will happen then. (Alternative implementation: be able to set all redirects to any value you want regardless of redirect value, then just set the redirect_url to null. More flexible this way)

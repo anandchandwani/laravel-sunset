@@ -12,11 +12,10 @@
 
 
 
+// $router->get('/', ['middleware' => ['trackIP', 'trackRequest'], function () {
 $router->get('/', ['middleware' => ['trackIP', 'trackRequest'], function () {
-// $router->get('/', ['middleware' => [], function () {
-    //TODO - Get if IP should be redirected!
+    
     $ip = app('request')->ip();
-
     $record = app('db')->select("select * from ips where ip = '$ip'");
 
     if (count($record)){
