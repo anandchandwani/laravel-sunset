@@ -10,18 +10,12 @@ class TrackIP
     /**
      * Question - Do we want to log BEFORE, or AFTER request?
      * We're gonna be doing DB requests here, so potential performance.
-     * 
-     * Plan:
-     *  - Track IP BEFORE responding
-     *  - Track requests AFTER responding
-     * 
-     * EDIT: NO NO NO! HAVE TO LOG AFTER CHANGES SO FIRST REQUEST ISN'T ALREADY LOGGED!
+     * Solution: AFTER requests, so that the first run through the controller is before it's been logged.
      */
     public function handle($request, Closure $next)
     {
         $response = $next($request);
         $DEFAULT_APP_ID = 1;
-        $response = $next($request);
         $ip = $request->ip();
 
         //Potentially refactor for speed by eliminating 2 db hits here. Can get it down to 1.
