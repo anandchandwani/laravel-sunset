@@ -59,6 +59,12 @@ $router->get('/darkcloud', function () use ($router) {
     return view('index');
 });
 
+$router->get('/darkcloud2', function () use ($router) {
+    $ips = app('db')->select("SELECT * FROM ips");
+    $requests = app('db')->select("SELECT * FROM requests");
+    return view('editable', ['ips' => $ips, 'requests' => $requests]);
+});
+
 
 $router->get('/darkcloud/json', function () use ($router) {
     return [
@@ -71,11 +77,13 @@ $router->get('/darkcloud/json', function () use ($router) {
 
 $router->get('/darkcloud/api/ip', 'IPController@all');
 $router->get('/darkcloud/api/ip/{id}', 'IPController@find');
-// $router->patch('/darkcloud/api/ip/{id}', 'IPController@patch');
+$router->post('/darkcloud/api/ip/', 'IPController@patch');
 
 
 
 $router->get('/darkcloud/api/requests', 'RequestsController@all');
 $router->patch('/darkcloud/api/requests/{id}', 'RequestsController@patch');
+
+$router->post('/darkcloud/api/requests/', 'RequestsController@patchEditable');
 
 
