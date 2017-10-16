@@ -18,11 +18,11 @@ $router->get('/', ['middleware' => ['trackIP', 'trackRequest'], function () {
     $ip = app('request')->ip();
     $record = app('db')->select("select * from ips where ip = '$ip'");
 
-    if (count($record)){
+    if (count($record) && $record[0]->is_blacklisted){
         return "Redirecting to " . $record[0]->redirect_url;
     }
 
-    return "Hey, you're new here, no need to redirect you.";
+    return "Hey, you're not blacklisted, no need to redirect you.";
 }]);
 
 $router->get('/clear', function () use ($router) {
