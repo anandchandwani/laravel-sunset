@@ -37,11 +37,6 @@ $router->get('/version', function () use ($router) {
     return $router->app->version();
 });
 
-$router->get('/ips', function () use ($router) {
-    return $results = app('db')->select("SELECT * FROM ips");
-});
-
-
 // $router->options('/darkcloud/ips', function () use ($router) {
 //     // return $results = app('db')->select("SELECT * FROM ips");
 //     // $content = app('db')->select("SELECT * FROM ips");
@@ -72,5 +67,15 @@ $router->get('/darkcloud/json', function () use ($router) {
         'requests' => app('db')->select("SELECT * FROM requests")
     ];
 });
+
+
+$router->get('/darkcloud/api/ip', 'IPController@all');
+$router->get('/darkcloud/api/ip/{id}', 'IPController@find');
+// $router->patch('/darkcloud/api/ip/{id}', 'IPController@patch');
+
+
+
+$router->get('/darkcloud/api/requests', 'RequestsController@all');
+$router->patch('/darkcloud/api/requests/{id}', 'RequestsController@patch');
 
 
