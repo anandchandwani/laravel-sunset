@@ -9,6 +9,9 @@ import { IpsTableComponent } from './components/ips-table/ips-table.component';
 import { ApiService } from './api.service';
 import {HttpClientModule} from '@angular/common/http';
 
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,7 +22,8 @@ import {HttpClientModule} from '@angular/common/http';
   imports: [
     BrowserModule,
     Ng2SmartTableModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxDatatableModule
   ],
   providers: [ApiService],
   bootstrap: [AppComponent]
