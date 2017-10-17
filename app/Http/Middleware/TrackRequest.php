@@ -7,9 +7,9 @@ use Closure;
 class TrackRequest
 {
     /**
-     * Note - Currently this does NOT track the very first request, it only tracks once request is in IP. This isn't necessarily bad, just depends on business requirements.
-     * 
-     * BUG - Currently it's creating two requests at a time. Why?
+     * Note - Currently this does NOT track the very first request, it only
+     * tracks once request is in IP. That's because it can only redirect after
+     * it has a record of the IP.
      */
     public function handle($request, Closure $next)
     {
@@ -19,7 +19,7 @@ class TrackRequest
         $ip = $request->ip();
         $result = app('db')->select("select * from ips where ip = '$ip'");
 
-        if (count($result)){
+        if (count($result) && $result[0]->is_blacklisted){
             app('db')->table('requests')->insert([
                 'ip_id' => $result[0]->id,
                 'redirected_to' => $result[0]->redirect_url,

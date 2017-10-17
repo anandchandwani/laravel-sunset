@@ -25,7 +25,7 @@ class TrackIP
             app('db')->table('ips')->insert([
                 'ip' => $request->ip(),
                 'app_id' => $DEFAULT_APP_ID,
-                'is_blacklisted' => true, //TODO LOL. 
+                'is_blacklisted' => null, //TODO LOL. STILL TESTING. WAS 'true'
                 'redirect_url' => 'https://www.reddit.com'
             ]);
         }
