@@ -18,7 +18,9 @@ class CreateAppsTable extends Migration
             $table->increments('id');
             $table->string('name'); //IP address of user
             $table->string('default_redirect_url');
-            $table->timestamps();
+            
+            $table->boolean('default_blacklist');
+            $table->enum('redirect_override', ['disabled', 'always_redirect', 'never_redirect']);
         });
 
         app('db')->table('apps')->insert([

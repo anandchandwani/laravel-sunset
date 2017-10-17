@@ -23,6 +23,7 @@ class TrackRequest
             app('db')->table('requests')->insert([
                 'ip_id' => $result[0]->id,
                 'redirected_to' => $result[0]->redirect_url,
+                'created_at' => new \DateTime(),
             ]);
         }
 
