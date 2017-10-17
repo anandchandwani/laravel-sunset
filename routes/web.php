@@ -55,7 +55,7 @@ function () use ($router) {
     return response($content, 200);
 }]);
 
-$router->get('/darkcloud_old', function () use ($router) {
+$router->get('/darkcloud_angular', function () use ($router) {
     return view('index');
 });
 

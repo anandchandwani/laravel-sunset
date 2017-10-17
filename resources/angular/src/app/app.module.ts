@@ -10,6 +10,7 @@ import { ApiService } from './api.service';
 import {HttpClientModule} from '@angular/common/http';
 
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { DarktableComponent } from './components/darktable/darktable.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     AppComponent,
     DataTableComponent,
     RequestsTableComponent,
-    IpsTableComponent
+    IpsTableComponent,
+    DarktableComponent
   ],
   imports: [
     BrowserModule,

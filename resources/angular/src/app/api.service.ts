@@ -17,4 +17,8 @@ export class ApiService {
     })
   }
 
+  getAll(){
+    return this.http.get('/darkcloud/json')
+  }
+
 }

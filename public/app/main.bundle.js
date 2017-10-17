@@ -42,10 +42,13 @@ var ApiService = (function () {
             console.log('Update response', response);
         });
     };
+    ApiService.prototype.getAll = function () {
+        return this.http.get('/darkcloud/json');
+    };
     return ApiService;
 }());
 ApiService = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])(),
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]) === "function" && _a || Object])
 ], ApiService);
 
@@ -75,7 +78,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h1>App Component! Yeah</h1>\n\n<hr>\n<h2>IPs Table</h2>\n<darkcloud-ips-table></darkcloud-ips-table>\n\n<hr>\n\n<h2>Redirects Table</h2>\n<darkcloud-requests-table></darkcloud-requests-table>\n"
+module.exports = "<h1>App Component! Yeah</h1>\n\n<darktable></darktable>\n\n<!-- <hr> -->\n<!-- <h2>IPs Table</h2> -->\n<!-- <darkcloud-ips-table></darkcloud-ips-table> -->\n\n<!-- <hr>\n\n<h2>Redirects Table</h2>\n<darkcloud-requests-table></darkcloud-requests-table> -->\n"
 
 /***/ }),
 
@@ -99,7 +102,7 @@ var AppComponent = (function () {
     return AppComponent;
 }());
 AppComponent = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-root',
         template: __webpack_require__("../../../../../src/app/app.component.html"),
         styles: [__webpack_require__("../../../../../src/app/app.component.css")]
@@ -124,6 +127,9 @@ AppComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_ips_table_ips_table_component__ = __webpack_require__("../../../../../src/app/components/ips-table/ips-table.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__api_service__ = __webpack_require__("../../../../../src/app/api.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__angular_common_http__ = __webpack_require__("../../../common/@angular/common/http.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__swimlane_ngx_datatable__ = __webpack_require__("../../../../@swimlane/ngx-datatable/release/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__swimlane_ngx_datatable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9__swimlane_ngx_datatable__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_darktable_darktable_component__ = __webpack_require__("../../../../../src/app/components/darktable/darktable.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -139,23 +145,27 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+
+
 var AppModule = (function () {
     function AppModule() {
     }
     return AppModule;
 }());
 AppModule = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["L" /* NgModule */])({
+    Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["NgModule"])({
         declarations: [
             __WEBPACK_IMPORTED_MODULE_2__app_component__["a" /* AppComponent */],
             __WEBPACK_IMPORTED_MODULE_4__components_data_table_data_table_component__["a" /* DataTableComponent */],
             __WEBPACK_IMPORTED_MODULE_5__components_requests_table_requests_table_component__["a" /* RequestsTableComponent */],
-            __WEBPACK_IMPORTED_MODULE_6__components_ips_table_ips_table_component__["a" /* IpsTableComponent */]
+            __WEBPACK_IMPORTED_MODULE_6__components_ips_table_ips_table_component__["a" /* IpsTableComponent */],
+            __WEBPACK_IMPORTED_MODULE_10__components_darktable_darktable_component__["a" /* DarktableComponent */]
         ],
         imports: [
-            __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
+            __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["BrowserModule"],
             __WEBPACK_IMPORTED_MODULE_3_ng2_smart_table__["a" /* Ng2SmartTableModule */],
-            __WEBPACK_IMPORTED_MODULE_8__angular_common_http__["a" /* HttpClientModule */]
+            __WEBPACK_IMPORTED_MODULE_8__angular_common_http__["a" /* HttpClientModule */],
+            __WEBPACK_IMPORTED_MODULE_9__swimlane_ngx_datatable__["NgxDatatableModule"]
         ],
         providers: [__WEBPACK_IMPORTED_MODULE_7__api_service__["a" /* ApiService */]],
         bootstrap: [__WEBPACK_IMPORTED_MODULE_2__app_component__["a" /* AppComponent */]]
@@ -163,6 +173,95 @@ AppModule = __decorate([
 ], AppModule);
 
 //# sourceMappingURL=app.module.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/darktable/darktable.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/darktable/darktable.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div>\n    <h3>\n      Dark Table - IPS v2\n    </h3>\n\n\n    <ngx-datatable\n    #mydatatable\n    class=\"material\"\n    [headerHeight]=\"50\"\n    [limit]=\"5\"\n    [columnMode]=\"'force'\"\n    [footerHeight]=\"50\"\n    [rowHeight]=\"'auto'\"\n    [rows]=\"rows\">\n    <ngx-datatable-column name=\"id\">\n      <ng-template ngx-datatable-cell-template let-value=\"value\" let-row=\"row\">\n        <span\n          title=\"Double click to edit\"\n          (dblclick)=\"editing[row.$$index + '-name'] = true\"\n          *ngIf=\"!editing[row.$$index + '-name']\">\n          {{value}}\n        </span>\n        <input\n          autofocus\n          (blur)=\"updateValue($event, 'name', value, row)\"\n          *ngIf=\"editing[row.$$index + '-name']\"\n          type=\"text\"\n          [value]=\"value\"\n        />\n      </ng-template>\n    </ngx-datatable-column>\n    <ngx-datatable-column name=\"ip\">\n      <ng-template ngx-datatable-cell-template let-row=\"row\" let-value=\"value\">\n         <!-- <span\n          title=\"Double click to edit\"\n          (dblclick)=\"editing[row.$$index + '-gender'] = true\"\n          *ngIf=\"!editing[row.$$index + '-gender']\">\n          {{value}}\n        </span>\n        <select\n          *ngIf=\"editing[row.$$index + '-gender']\"\n          (change)=\"updateValue($event, 'gender', value, row)\"\n          [value]=\"value\">\n          <option value=\"male\">Male</option>\n          <option value=\"female\">Female</option>\n        </select> -->\n        {{value}}\n      </ng-template>\n    </ngx-datatable-column>\n    <ngx-datatable-column name=\"redirect_url\" prop=\"redirect_url\">\n      <ng-template ngx-datatable-cell-template let-value=\"value\" let-row=\"row\">\n        <span\n        title=\"Double click to edit\"\n        (dblclick)=\"editing[row.$$index + '-redirect_url'] = true\"\n        *ngIf=\"!editing[row.$$index + '-redirect_url']\">\n        {{value}}\n      </span>\n      <input\n        autofocus\n        (blur)=\"updateValue($event, 'redirect_url', value, row)\"\n        *ngIf=\"editing[row.$$index + '-redirect_url']\"\n        type=\"text\"\n        [value]=\"value\"\n      />\n      </ng-template>\n    </ngx-datatable-column>\n  </ngx-datatable>\n\n\n  </div>\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/darktable/darktable.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DarktableComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__api_service__ = __webpack_require__("../../../../../src/app/api.service.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var DarktableComponent = (function () {
+    function DarktableComponent(api) {
+        var _this = this;
+        // rows = [
+        //   { name: 'Austin', gender: 'Male', company: 'Swimlane' },
+        //   { name: 'Dany', gender: 'Male', company: 'KFC' },
+        //   { name: 'Molly', gender: 'Female', company: 'Burger King' },
+        // ];
+        // columns = [
+        //   { prop: 'name' },
+        //   { name: 'Gender' },
+        //   { name: 'Company' }
+        // ];
+        this.editing = {};
+        this.rows = [];
+        this.api = api;
+        console.log('Constructor called');
+        this.api.getAll().subscribe(function (data) {
+            _this.rows = data.json().ips;
+            console.log(_this.rows);
+        });
+    }
+    /** TODO TODO ! MAKE THIS DO API CALLS, OTHERWISE IT'S JUST CLIENT SIDE */
+    DarktableComponent.prototype.updateValue = function (event, cell, cellValue, row) {
+        this.editing[row.$$index + '-' + cell] = false;
+        this.rows[row.$$index][cell] = event.target.value;
+        console.log(event, cell, cellValue, row);
+    };
+    DarktableComponent.prototype.ngOnInit = function () {
+    };
+    return DarktableComponent;
+}());
+DarktableComponent = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        selector: 'darktable',
+        template: __webpack_require__("../../../../../src/app/components/darktable/darktable.component.html"),
+        styles: [__webpack_require__("../../../../../src/app/components/darktable/darktable.component.css")]
+    }),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__api_service__["a" /* ApiService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__api_service__["a" /* ApiService */]) === "function" && _a || Object])
+], DarktableComponent);
+
+var _a;
+//# sourceMappingURL=darktable.component.js.map
 
 /***/ }),
 
@@ -328,7 +427,7 @@ var DataTableComponent = (function () {
     return DataTableComponent;
 }());
 DataTableComponent = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'darkcloud-data-table',
         template: __webpack_require__("../../../../../src/app/components/data-table/data-table.component.html"),
         styles: [__webpack_require__("../../../../../src/app/components/data-table/data-table.component.css")]
@@ -408,7 +507,7 @@ var IpsTableComponent = (function (_super) {
     return IpsTableComponent;
 }(__WEBPACK_IMPORTED_MODULE_2__data_table_data_table_component__["a" /* DataTableComponent */]));
 IpsTableComponent = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'darkcloud-ips-table',
         // templateUrl: '../data-table/data-table.component.html',
         template: __webpack_require__("../../../../../src/app/components/ips-table/ips-table.component.html"),
@@ -491,7 +590,7 @@ var RequestsTableComponent = (function (_super) {
     return RequestsTableComponent;
 }(__WEBPACK_IMPORTED_MODULE_2__data_table_data_table_component__["a" /* DataTableComponent */]));
 RequestsTableComponent = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'darkcloud-requests-table',
         // templateUrl: '../data-table/data-table.component.html',
         template: __webpack_require__("../../../../../src/app/components/requests-table/requests-table.component.html"),
@@ -537,7 +636,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 if (__WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment */].production) {
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_20" /* enableProdMode */])();
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["enableProdMode"])();
 }
 Object(__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_2__app_app_module__["a" /* AppModule */]);
 //# sourceMappingURL=main.js.map
