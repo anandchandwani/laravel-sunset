@@ -75,7 +75,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h1>App Component! Yeah</h1>\n\n<hr>\n<h2>IPs Table</h2>\n<darkcloud-ips-table></darkcloud-ips-table>\n\n<hr>\n\n<h2>Requests Table</h2>\n<darkcloud-requests-table></darkcloud-requests-table>\n"
+module.exports = "<h1>App Component! Yeah</h1>\n\n<hr>\n<h2>IPs Table</h2>\n<darkcloud-ips-table></darkcloud-ips-table>\n\n<hr>\n\n<h2>Redirects Table</h2>\n<darkcloud-requests-table></darkcloud-requests-table>\n"
 
 /***/ }),
 
