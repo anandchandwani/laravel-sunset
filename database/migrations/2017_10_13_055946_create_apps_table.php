@@ -25,7 +25,9 @@ class CreateAppsTable extends Migration
 
         app('db')->table('apps')->insert([
             'name' => 'default',
-            'default_redirect_url' => "https://google.com"
+            'default_redirect_url' => "https://google.com",
+            'default_blacklist' => true,
+            'redirect_override' => 'disabled'
         ]);
 
     }

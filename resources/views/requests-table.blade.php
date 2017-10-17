@@ -1,4 +1,4 @@
-<h1>Requests Table</h1>
+<h1>Request Redirects Table</h1>
 @if (count($requests))
 <table class="table">
     <thead>
