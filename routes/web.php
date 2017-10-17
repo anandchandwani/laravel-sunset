@@ -55,14 +55,25 @@ function () use ($router) {
     return response($content, 200);
 }]);
 
-$router->get('/darkcloud', function () use ($router) {
+$router->get('/darkcloud_old', function () use ($router) {
     return view('index');
 });
 
-$router->get('/darkcloud2', function () use ($router) {
+$router->get('/darkcloud', function () use ($router) {
     $ips = app('db')->select("SELECT * FROM ips");
     $requests = app('db')->select("SELECT * FROM requests");
-    return view('editable', ['ips' => $ips, 'requests' => $requests]);
+    $apps = app('db')->select("SELECT * FROM ips");
+    return view('editable', [
+        'ips' => $ips, 
+        'requests' => $requests,
+        'apps' => $apps
+    ]);
+});
+
+$router->get('/darkcloud/ips/{id}', function ($id) {
+    $ips = app('db')->select("SELECT * FROM ips where id = " .$id);
+    return view('editable', [ 'ips' => $ips, 'requests' => []]);
+    // return $ips;
 });
 
 

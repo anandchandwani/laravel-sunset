@@ -72,8 +72,9 @@
                     <td>
                         <a href="#" 
                         data-type="text" 
+                        data-name="redirect_url"
                         data-pk="{{$item->id}}" 
-                        data-url="/post" 
+                        data-url="/darkcloud/api/ip/" 
                         data-title="Update redirect_url, change where the ip will be redirected to in the future.">{{$item->redirect_url}}</a>
                     </td>
                 </tr>
@@ -83,33 +84,38 @@
         </table>
 
         <hr>
-
-        <h1>Requests Table</h1>
-
-        <table class="table">
-            <thead>
-                <th>ID</th>
-                <th>IP ID</th>
-                <th>redirected_to</th>
-            </thead>
-            <tbody>
-                @foreach ($requests as $item)
-                <tr>
-                    <td>{{$item->id}}</td>
-                    <td>{{$item->ip_id}}</td>
-                    <td>
-                        <a href="#" 
-                        data-name="redirected_to"
-                        data-type="text" 
-                        data-pk="{{$item->id}}" 
-                        data-url="/darkcloud/api/requests/" 
-                        data-title="A log of previous redirects.">{{$item->redirected_to}}</a>
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-
-        </table>
+        @if (count($requests))
+        <div>
+            <h1>Requests Table</h1>
+    
+            <table class="table">
+                <thead>
+                    <th>ID</th>
+                    <th>IP ID</th>
+                    <th>redirected_to</th>
+                </thead>
+                <tbody>
+                    @foreach ($requests as $item)
+                    <tr>
+                        <td>{{$item->id}}</td>
+                        <!-- <td>{{$item->ip_id}}</td> -->
+                        <td><a href="/darkcloud/ips/{{$item->ip_id}}">{{$item->ip_id}}</a></td>
+                        <td>
+                            <!-- <a href="#" 
+                            data-name="redirected_to"
+                            data-type="text" 
+                            data-pk="{{$item->id}}" 
+                            data-url="/darkcloud/api/requests/" 
+                            data-title="A log of previous redirects.">{{$item->redirected_to}}</a> -->
+                            {{$item->redirected_to}}
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+    
+            </table>
+        </div>
+        @endif
 
         <script>
             $('a[data-pk').editable();
