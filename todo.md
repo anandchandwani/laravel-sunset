@@ -3,6 +3,10 @@
 Angular backend
 * [ ] Ability to edit all fields in a row
 * [ ] Ability to search "All found IPs", ones that aren't whitelisted/blacklisted
+    - Could just be a date-time search?
+    - Annoyingly, x-editable treats 'null' as '0' for frontend, so we'd need to modify the db from boolean to something else to get it to work on that table.
+* [ ] Put app in 'listen only' mode.
+* [ ] Create apps page
 
 
 PERFORMANCE:
