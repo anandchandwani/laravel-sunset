@@ -2,7 +2,7 @@
 
 @if (count($apps))
 
-<table class="table">
+<table class="table sortable-theme-bootstrap" data-sortable>
     <thead>
         <th>ID</th>
         <th>name</th>

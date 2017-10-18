@@ -39,34 +39,39 @@ function redirectResponse($url){
 /**
  * TODO - Refactor to controller
  */
-$router->get('/', ['middleware' => ['trackIP', 'trackRequest'], function () {
+// $router->get('/', ['middleware' => ['trackIP', 'trackRequest']], 'MainController@get'); 
+
+$router->get('/', 'MainController@get');
+
+
+// $router->get('/', ['middleware' => ['trackIP', 'trackRequest'], function () {
     
-    $requestIP = app('request')->ip();
-    $record = app('db')->select("select * from ips where ip = '$requestIP'");
+//     $requestIP = app('request')->ip();
+//     $record = app('db')->select("select * from ips where ip = '$requestIP'");
 
-    if (empty($record)){
-        return noRedirectResponse();
-    }
+//     if (empty($record)){
+//         return noRedirectResponse();
+//     }
 
-    $ip = $record[0];
-    $app = app('db')->select("select * from apps where id = " . $ip->app_id)[0];
+//     $ip = $record[0];
+//     $app = app('db')->select("select * from apps where id = " . $ip->app_id)[0];
 
-    //App overrides
-    if ($app->redirect_override === "always_redirect"){
-        return redirectResponse($ip->redirect_url);
-    }
-    else if ($app->redirect_override === "never_redirect"){
-        return noRedirectResponse();
-    }
+//     //App overrides
+//     if ($app->redirect_override === "always_redirect"){
+//         return redirectResponse($ip->redirect_url);
+//     }
+//     else if ($app->redirect_override === "never_redirect"){
+//         return noRedirectResponse();
+//     }
 
-    //Individual IP logic
-    if ($ip->is_blacklisted){
-        return redirectResponse($ip->redirect_url);
-    }
-    else {
-        return noRedirectResponse();
-    }
-}]);
+//     //Individual IP logic
+//     if ($ip->is_blacklisted){
+//         return redirectResponse($ip->redirect_url);
+//     }
+//     else {
+//         return noRedirectResponse();
+//     }
+// }]);
 
 $router->get('/clear', function () use ($router) {
     app('db')->delete("delete from requests");
@@ -107,20 +112,15 @@ $router->get('/darkcloud', function () use ($router) {
     $requests = app('db')->select("SELECT * FROM requests");
     $apps = app('db')->select("SELECT * FROM apps");
 
-    // var_dump($apps);
-    // die;
-
-    // foreach($apps as $app){
-    //     $app = transformAppEnums($app);
-    //     // var_dump($app->redirect_override); 
-    //     // die;
-    // }
-
     return view('editable', [
         'ips' => $ips, 
         'requests' => $requests,
         'apps' => $apps
     ]);
+});
+
+$router->get('/darkcloud/options', function () use ($router) {
+    return view('options');
 });
 
 $router->get('/darkcloud/ips/{id}', function ($id) {
@@ -146,11 +146,8 @@ $router->post('/darkcloud/api/ip/', 'IPController@patch');
 
 
 $router->get('/darkcloud/api/requests', 'RequestsController@all');
-$router->patch('/darkcloud/api/requests/{id}', 'RequestsController@patch');
-
+// $router->patch('/darkcloud/api/requests/{id}', 'RequestsController@patch');
 $router->post('/darkcloud/api/requests/', 'RequestsController@patchEditable');
-
-
 $router->post('/darkcloud/api/apps/', 'AppsController@post');
 
 

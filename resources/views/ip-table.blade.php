@@ -1,6 +1,6 @@
 <h3>IPs Table</h3>
 @if (count($ips))
-<table class="table">
+<table class="table sortable-theme-bootstrap" data-sortable>
     <thead>
         <th>ID</th>
         <th>IP</th>

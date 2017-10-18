@@ -7,9 +7,8 @@ use Closure;
 class TrackRequest
 {
     /**
-     * Note - Currently this does NOT track the very first request, it only
-     * tracks once request is in IP. That's because it can only redirect after
-     * it has a record of the IP.
+     * Creates an entry in 'Requests'. It does NOT track the very first request
+     * (when the IP is first logged), but will log future requests.
      */
     public function handle($request, Closure $next)
     {

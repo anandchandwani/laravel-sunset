@@ -16,6 +16,10 @@
     <link rel="stylesheet" href="/editable/bootstrap3-editable/css/bootstrap-editable.css">
     <script src="/editable/bootstrap3-editable/js/bootstrap-editable.js"></script>
 
+
+    <script src="/sortable/js/sortable.js"></script>
+    <link rel="stylesheet" href="sortable/css/sortable-theme-bootstrap.css" />
+
     <!-- <link rel="stylesheet" href="http://brobin.github.io/hacker-bootstrap/css/hacker.css"> -->
 
 </head>

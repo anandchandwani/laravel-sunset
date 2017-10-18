@@ -8,9 +8,8 @@ use Closure;
 class TrackIP
 {
     /**
-     * Question - Do we want to log BEFORE, or AFTER request?
-     * We're gonna be doing DB requests here, so potential performance.
-     * Solution: AFTER requests, so that the first run through the controller is before it's been logged.
+     * Create an entry in the "ips" table. Ips should be unique, so if it's a
+     * known IP address do nothing.
      */
     public function handle($request, Closure $next)
     {
@@ -18,15 +17,21 @@ class TrackIP
         $DEFAULT_APP_ID = 1;
         $ip = $request->ip();
 
-        //Potentially refactor for speed by eliminating 2 db hits here. Can get it down to 1.
-        $alreadyExists = count(app('db')->select("select * from ips where ip = '$ip'"));
+        $ipRecord = app('db')->select("select * from ips where ip = '$ip'");
+        $alreadyExists = count($ipRecord);
 
         if (!$alreadyExists){
+            //TODO - Need a way to get identifier with each request.
+            //Could set a custom HTTP header.
+            $identifier = "default";
+
+            $app = app('db')->select("select * from apps where name = '$identifier'")[0];
+
             app('db')->table('ips')->insert([
                 'ip' => $request->ip(),
-                'app_id' => $DEFAULT_APP_ID,
-                'is_blacklisted' => null, //TODO LOL. STILL TESTING. WAS 'true'
-                'redirect_url' => 'https://www.reddit.com'
+                'app_id' => $app->id,
+                'is_blacklisted' => $app->default_blacklist,
+                'redirect_url' => $app->default_redirect_url
             ]);
         }
 
