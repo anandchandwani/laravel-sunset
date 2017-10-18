@@ -148,6 +148,7 @@ $router->post('/darkcloud/api/ip/', 'IPController@patch');
 $router->get('/darkcloud/api/requests', 'RequestsController@all');
 // $router->patch('/darkcloud/api/requests/{id}', 'RequestsController@patch');
 $router->post('/darkcloud/api/requests/', 'RequestsController@patchEditable');
+$router->get('/darkcloud/api/apps/', 'AppsController@all');
 $router->post('/darkcloud/api/apps/', 'AppsController@post');
 
 

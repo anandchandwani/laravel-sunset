@@ -62,6 +62,11 @@
 
                 onAll: function(ev, data){
                     // $('a[data-pk').editable();
+                    // console.log('onAll', ev);
+                },
+                onLoadSuccess: function(ev, data){
+                    // console.log('onLoad success');
+                    $('a[data-pk').editable();
                 },
                 responseHandler: function(res){
                     console.log('resHandler', res);
