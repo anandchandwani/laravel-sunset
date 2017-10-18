@@ -18,10 +18,13 @@
 
 
     <script src="/sortable/js/sortable.js"></script>
-    <link rel="stylesheet" href="sortable/css/sortable-theme-bootstrap.css" />
+    <link rel="stylesheet" href="/sortable/css/sortable-theme-bootstrap.css" />
 
-    <!-- <link rel="stylesheet" href="http://brobin.github.io/hacker-bootstrap/css/hacker.css"> -->
 
+    <script src="/bootstrap-table-master/dist/bootstrap-table.js"></script>
+    <script src="/bootstrap-table-master/dist/extensions/editable/bootstrap-table-editable.js"></script>
+    <script src="/bootstrap-table-master/dist/locale/bootstrap-table-en-US.js"></script>
+    <link rel="stylesheet" href="/bootstrap-table-master/dist/bootstrap-table.css" />
 </head>
 
 <body>
@@ -40,9 +43,6 @@
                     <li>
                         <a onclick="toggleDarkmode()">Toggle Darkmode</a>
                     </li>
-                    <!-- <li role="presentation">
-                        <a href="#">Contact</a>
-                    </li> -->
                 </ul>
             </nav>
             <h1>Dark Cloud</h1>
@@ -54,15 +54,40 @@
         <link id='hackercss' disabled rel="stylesheet" href="http://brobin.github.io/hacker-bootstrap/css/hacker.css">
 
         <script>
-            $('a[data-pk').editable();
+            $('table').bootstrapTable({
+                search: true,
+                showColumns: true,
+                showToggle: true,
+                editable: true,
+
+                onAll: function(ev, data){
+                    // $('a[data-pk').editable();
+                },
+                responseHandler: function(res){
+                    console.log('resHandler', res);
+
+                    // return [
+                    //     {
+                    //         0: "0",
+                    //         1: "12341.43141",
+                    //         2: "<h2>I'm an h2</h2>",
+                    //         3: '<a href="#" data-type="text" data-name="redirect_url" data-pk="3" data-url="/darkcloud/api/ip/" data-title="Update redirect_url, change where the ip will be redirected to in the future." class="editable editable-click">https://google.comasdf</a>'
+                    //     }
+                    // ]
+                    return res;
+                },
+                showRefresh: true,
+            });            
+            // $('a[data-pk').editable();
+
 
             $(document).ready(function(){
-                $('#hackercss')[0].disabled = window.localStorage['darkmode'];
+                $('#hackercss')[0].disabled = (window.localStorage['darkModeCSSDisabled'] == 'true');
             });
 
             function toggleDarkmode(){
                 $('#hackercss')[0].disabled = !$('#hackercss')[0].disabled;
-                window.localStorage['darkmode'] = $('#hackercss')[0].disabled;
+                window.localStorage['darkModeCSSDisabled'] = $('#hackercss')[0].disabled
             }
         </script>
 

@@ -2,7 +2,7 @@
 
 @if (count($apps))
 
-<table class="table sortable-theme-bootstrap" data-sortable>
+<table class="table sortable-theme-bootstrap" >
     <thead>
         <th>ID</th>
         <th>name</th>
@@ -35,7 +35,11 @@
 
 </table>
 
-<p>TODO - Need button to create new app.</p>
+<br>
+
+<button type="button" class="btn btn-default btn-primary" class='js-create-app'>
+  <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Create New App (TODO)
+</button>
 
 @else
 No apps data.

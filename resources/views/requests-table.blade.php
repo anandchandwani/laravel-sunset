@@ -1,8 +1,9 @@
 <h1>Request Redirects Table</h1>
 @if (count($requests))
-<table class="table sortable-theme-bootstrap" data-sortable>
-<!-- <table class="table"> -->
+<!-- <table class="table" data-toggle="table"> -->
+<table ip="requestsTable" class="table">
     <thead>
+        <!-- <th data-field="checked" data-checkbox="true"></th> -->
         <th>ID</th>
         <th>IP ID</th>
         <th>redirected_to</th>
@@ -13,7 +14,8 @@
         <tr>
             <td>{{$item->id}}</td>
             <td>
-                <a href="/darkcloud/ips/{{$item->ip_id}}">{{$item->ip_id}}</a>
+                <!-- <a href="/darkcloud/ips/{{$item->ip_id}}">{{$item->ip_id}}</a> -->
+                {{$item->ip_id}}
             </td>
             <td>
                 <!-- <a href="#" 
