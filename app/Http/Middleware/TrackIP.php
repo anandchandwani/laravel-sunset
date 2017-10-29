@@ -21,11 +21,21 @@ class TrackIP
         $alreadyExists = count($ipRecord);
 
         if (!$alreadyExists){
-            //TODO - Need a way to get identifier with each request.
-            //Could set a custom HTTP header.
-            $identifier = "default";
+            $identifier = $request->input('appName');
+            
+            if ($identifier == null){
+                $identifier = "default";
+            }
+            
+            $app = app('db')->select("select * from apps where name = '$identifier'");
 
-            $app = app('db')->select("select * from apps where name = '$identifier'")[0];
+            //If identifier is a non-matching string
+            if (count($app)){
+                $app = $app[0];
+            }
+            else {
+                return ["error" => true, 'message' => 'invalid appName'];
+            }
 
             app('db')->table('ips')->insert([
                 'ip' => $request->ip(),

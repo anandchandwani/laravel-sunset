@@ -5,8 +5,6 @@
 data-url="/darkcloud/api/ip" 
 data-id-field="id"
 data-editable-url="/darkcloud/api/ip/">
-    <!-- <table id="ipTable" class="table"> -->
-    <!-- <table class="table" data-toggle="table"> -->
     <thead>
         <!-- <th data-field="checked" data-checkbox="true"></th> -->
         <th data-field="id">ID</th>
@@ -16,7 +14,7 @@ data-editable-url="/darkcloud/api/ip/">
         data-editable="true"
         data-editable-type="select"
         
-        data-editable-title="Blacklist this IP?"
+        data-editable-title="Blacklist this IP? The IP will NEVER be redirected."
         data-editable-source="[{value: 0, text: 'No'}, {value: 1, text: 'Yes'}]"
         >is_blacklisted</th>
         <th data-field="redirect_url" data-editable="true">redirect_url</th>
@@ -28,7 +26,7 @@ data-editable-url="/darkcloud/api/ip/">
             <td>{{$item->ip}}</td>
             <td>
                 <a href="#" data-name="is_blacklisted" data-type="select" data-pk="{{$item->id}}" data-url="/darkcloud/api/ip/" data-value="{{$item->is_blacklisted ? 1 : 0}}"
-                    data-source="[{value: 0, text: 'No'}, {value: 1, text: 'Yes'}]" data-title="Blacklist this IP?">
+                    data-source="[{value: 0, text: 'No'}, {value: 1, text: 'Yes'}]">
                 </a>
             </td>
 

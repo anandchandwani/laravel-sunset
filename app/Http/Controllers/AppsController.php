@@ -34,4 +34,18 @@ class AppsController extends Controller
 
         return app('db')->update("update requests set ".$name." = '".$value."' where id = ".$id);
     }
+
+    public function createApp(Request $request){
+
+        if ($request->input('app') === "create"){
+            app('db')->table('apps')->insert([
+                'name' => '',
+                'default_redirect_url' => "",
+                'default_blacklist' => true,
+                'redirect_override' => 'disabled'
+            ]);
+
+            return redirect('darkcloud');
+        }
+    }
 }

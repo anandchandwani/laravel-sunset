@@ -10,68 +10,7 @@
 |
 */
 
-//Goes from Enum -> Frontend. x-editable needs integers, not strings. :(
-// function transformAppEnums($app){
-//     switch ($app->redirect_override) {
-//         case 'disabled':
-//             $newEnum = 0;
-//             break;
-//         case 'always_redirect':
-//             $newEnum = 1;
-//             break;
-//         case 'never_redirect':
-//             $newEnum = 2;
-//             break;
-//     }
-//     $app->redirect_override = $newEnum;
-//     return $app;
-// }
-
-
-function noRedirectResponse(){
-    return "You're not being blacklisted, no reason to redirect.";
-}
-
-function redirectResponse($url){
-    return "Redirecting to " . $url;
-}
-
-/**
- * TODO - Refactor to controller
- */
-// $router->get('/', ['middleware' => ['trackIP', 'trackRequest']], 'MainController@get'); 
-
 $router->get('/', 'MainController@get');
-
-
-// $router->get('/', ['middleware' => ['trackIP', 'trackRequest'], function () {
-    
-//     $requestIP = app('request')->ip();
-//     $record = app('db')->select("select * from ips where ip = '$requestIP'");
-
-//     if (empty($record)){
-//         return noRedirectResponse();
-//     }
-
-//     $ip = $record[0];
-//     $app = app('db')->select("select * from apps where id = " . $ip->app_id)[0];
-
-//     //App overrides
-//     if ($app->redirect_override === "always_redirect"){
-//         return redirectResponse($ip->redirect_url);
-//     }
-//     else if ($app->redirect_override === "never_redirect"){
-//         return noRedirectResponse();
-//     }
-
-//     //Individual IP logic
-//     if ($ip->is_blacklisted){
-//         return redirectResponse($ip->redirect_url);
-//     }
-//     else {
-//         return noRedirectResponse();
-//     }
-// }]);
 
 $router->get('/clear', function () use ($router) {
     app('db')->delete("delete from requests");
@@ -85,13 +24,6 @@ $router->get('/version', function () use ($router) {
     return $router->app->version();
 });
 
-// $router->options('/darkcloud/ips', function () use ($router) {
-//     // return $results = app('db')->select("SELECT * FROM ips");
-//     // $content = app('db')->select("SELECT * FROM ips");
-//     return response('headers yo', 200)
-//     ->header("Access-Control-Allow-Headers", "_headers,_normalizednames")
-//     ->header('Access-Control-Allow-Origin', '*');
-// });
 
 $router->get('/darkcloud/ips', ['middleware' => ['corsMiddleware'], 
 function () use ($router) { 
@@ -118,6 +50,8 @@ $router->get('/darkcloud', function () use ($router) {
         'apps' => $apps
     ]);
 });
+
+
 
 $router->get('/darkcloud/options', function () use ($router) {
     return view('options');
@@ -150,5 +84,6 @@ $router->get('/darkcloud/api/requests', 'RequestsController@all');
 $router->post('/darkcloud/api/requests/', 'RequestsController@patchEditable');
 $router->get('/darkcloud/api/apps/', 'AppsController@all');
 $router->post('/darkcloud/api/apps/', 'AppsController@post');
+$router->post('/darkcloud', 'AppsController@createApp');
 
 
