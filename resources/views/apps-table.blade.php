@@ -35,22 +35,15 @@ data-editable-url="/darkcloud/api/apps/">
 <br>
 
 
-<div class="row">
-    <div class="col-md-3">
-        <!-- <form method="post"> -->
-            <button type="submit" name="app" value="create" class="btn btn-default btn-primary create-apps">
-                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Create New App
-            </button>
-        <!-- </form> -->
-    </div>
-    <div class="col-md-3">
-        <button type="submit" name="app" value="create" class="btn btn-default btn-danger delete-apps">
-            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> 
-            Delete Selected Apps
-        </button>
-    </div>
+<div class="btn-group" role="group" aria-label="...">
+    <button type="submit" name="app" value="create" class="btn btn-default btn-primary create-apps">
+        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Create New App
+    </button>
+    <button type="submit" name="app" value="create" class="btn btn-default btn-danger delete-apps">
+        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+        Delete Selected Apps
+    </button>
 </div>
-
 
 
 <script>
@@ -79,13 +72,11 @@ data-editable-url="/darkcloud/api/apps/">
             });
         });
 
-        // $('#appTable').bootstrapTable({
-        //     onCheck: function (arg1, arg2) {
-        //         console.log('onCheck', arg1, arg2);
-        //     },
-        //     onUncheck: function (arg1, arg2) {
-        //         console.log('onUncheck', arg1, arg2);
-        //     }
-        // });
+        $('#appTable').on('check.bs.table uncheck.bs.table', handleDeleteBtn);
+        function handleDeleteBtn(){
+            const disable = !$('#appTable').bootstrapTable('getSelections').length;
+            $('.delete-apps').attr('disabled', disable);   
+        }
+        handleDeleteBtn();
     });
 </script>
