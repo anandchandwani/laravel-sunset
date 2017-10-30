@@ -9,7 +9,7 @@ data-editable-url="/darkcloud/api/apps/">
         <th data-field="id">ID</th>
         <th data-field="name"
             data-editable="true"
-            data-editable-title="Each app should make a GET request to the darkcloud URL with an 'appName' field, which corresponds to this name field to determine which app it is.  If 'appName' is omitted then 'default' is used. Example: `http://darkcloud.com/?appName=test`">
+            data-editable-title="Each app should make a GET request to the darkcloud URL with an 'appName' field, which corresponds to this name field to determine which app it is.  If 'appName' is omitted then 'default' is used. Example: `http://IP-GOES-HERE/?appName=test`">
             name</th>
         <th data-field="default_redirect_url"
             data-editable="true">
@@ -68,6 +68,7 @@ data-editable-url="/darkcloud/api/apps/">
                 data: {ids: ids},
                 success: function(res){
                     $('#appTable').bootstrapTable('refresh');
+                    $('.delete-apps').attr('disabled', true);   
                 }
             });
         });

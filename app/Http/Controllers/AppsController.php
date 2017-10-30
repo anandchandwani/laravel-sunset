@@ -42,7 +42,7 @@ class AppsController extends Controller
                 'name' => '',
                 'default_redirect_url' => "",
                 'default_blacklist' => true,
-                'redirect_override' => 'disabled'
+                'redirect_override' => 'always_redirect'
             ]);
 
             return ['created' => true];
@@ -53,6 +53,10 @@ class AppsController extends Controller
 
     public function delete(Request $request){
         $ids = $request->input('ids');
-        return app('db')->table('apps')->whereIn('id', $ids)->delete();
+        app('db')->statement('SET FOREIGN_KEY_CHECKS=0');
+        app('db')->table('ips')->whereIn('app_id', $ids)->update(['app_id' => null]);
+        app('db')->table('apps')->whereIn('id', $ids)->delete();
+        app('db')->statement('SET FOREIGN_KEY_CHECKS=1');
+        return;
     }
 }
