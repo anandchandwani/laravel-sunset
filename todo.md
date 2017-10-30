@@ -1,11 +1,12 @@
 * [X] ~~*"Listening Only" mode.  Solution: App-based override.*~~
 
 Angular 
-* [ ] Create new apps
-* [ ] Universal blacklist, share across all apps.
-    - Repurpose `is_blacklisted` field, so it's no longer used for IP-based redirect logic.
-        - Each campaign can be chosen if it's redirecting to tracking platform or not
-        - AND all blacklisted IPs are ALWAYS blacklisted, regardless of campagin status.
+* [X] ~~*Create new apps*~~
+* [X] ~~*Universal blacklist, share across all apps.*~~
+    - [X] ~~*Repurpose `is_blacklisted` field, so it's no longer used for IP-based redirect logic.*~~
+        - [X] ~~*Each campaign can be chosen if it's redirecting to tracking platform or not*~~
+        - [X] ~~*AND all blacklisted IPs are ALWAYS blacklisted, regardless of campagin status.*~~
+* [X] ~~*Listen to get request "appName" param to get app*~~
 
 If hours are under 15 hours, then just go for it. 
 

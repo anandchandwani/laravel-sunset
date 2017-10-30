@@ -45,7 +45,14 @@ class AppsController extends Controller
                 'redirect_override' => 'disabled'
             ]);
 
-            return redirect('darkcloud');
+            return ['created' => true];
         }
+        return ['error' => true, 'message' => 'Input was not properly set.'];
+        
+    }
+
+    public function delete(Request $request){
+        $ids = $request->input('ids');
+        return app('db')->table('apps')->whereIn('id', $ids)->delete();
     }
 }

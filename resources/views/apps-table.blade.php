@@ -28,16 +28,64 @@ data-editable-url="/darkcloud/api/apps/">
             data-editable-title="Redirect requests coming in from this app. This value will be overridden by any IP blacklists.">
             redirect app
         </th>
+        <th data-field="state" data-checkbox="true"></th>
     </thead>
 </table>
 
 <br>
 
-<form method="post">
-        <!-- <input type="submit" name="upvote" value="Upvote" /> -->
 
-        <button type="submit" name="app" value="create" class="btn btn-default btn-primary" class='js-create-app'>
-            <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Create New App
+<div class="row">
+    <div class="col-md-3">
+        <!-- <form method="post"> -->
+            <button type="submit" name="app" value="create" class="btn btn-default btn-primary create-apps">
+                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Create New App
+            </button>
+        <!-- </form> -->
+    </div>
+    <div class="col-md-3">
+        <button type="submit" name="app" value="create" class="btn btn-default btn-danger delete-apps">
+            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> 
+            Delete Selected Apps
         </button>
-</form>
+    </div>
+</div>
 
+
+
+<script>
+    $(document).on('ready', function(){
+
+        $('.create-apps').click(function(e){
+            $.ajax({
+                url: '/darkcloud/api/apps/create',
+                type: 'POST',
+                data: {app: 'create'},
+                success: function(res){
+                    $('#appTable').bootstrapTable('refresh');
+                }
+            })
+        })
+
+        $('.delete-apps').click(function(e){
+            let ids = $('#appTable').bootstrapTable('getSelections').map(x => x.id);
+            $.ajax({
+                url: '/darkcloud/api/apps',
+                type: 'DELETE',
+                data: {ids: ids},
+                success: function(res){
+                    $('#appTable').bootstrapTable('refresh');
+                }
+            });
+        });
+
+        // $('#appTable').bootstrapTable({
+        //     onCheck: function (arg1, arg2) {
+        //         console.log('onCheck', arg1, arg2);
+        //     },
+        //     onUncheck: function (arg1, arg2) {
+        //         console.log('onUncheck', arg1, arg2);
+        //     }
+        // });
+    });
+</script>

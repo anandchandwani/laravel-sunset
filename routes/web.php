@@ -84,6 +84,9 @@ $router->get('/darkcloud/api/requests', 'RequestsController@all');
 $router->post('/darkcloud/api/requests/', 'RequestsController@patchEditable');
 $router->get('/darkcloud/api/apps/', 'AppsController@all');
 $router->post('/darkcloud/api/apps/', 'AppsController@post');
-$router->post('/darkcloud', 'AppsController@createApp');
+$router->post('/darkcloud/api/apps/create', 'AppsController@createApp');
+
+$router->delete('/darkcloud/api/apps', 'AppsController@delete');
+
 
 

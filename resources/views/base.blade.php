@@ -68,19 +68,10 @@
                     // console.log('onLoad success');
                     $('a[data-pk').editable();
                 },
-                responseHandler: function(res){
-                    console.log('resHandler', res);
-
-                    // return [
-                    //     {
-                    //         0: "0",
-                    //         1: "12341.43141",
-                    //         2: "<h2>I'm an h2</h2>",
-                    //         3: '<a href="#" data-type="text" data-name="redirect_url" data-pk="3" data-url="/darkcloud/api/ip/" data-title="Update redirect_url, change where the ip will be redirected to in the future." class="editable editable-click">https://google.comasdf</a>'
-                    //     }
-                    // ]
-                    return res;
-                },
+                // responseHandler: function(res){
+                //     // console.log('resHandler', res);
+                //     return res;
+                // },
                 showRefresh: true,
             });            
             // $('a[data-pk').editable();
