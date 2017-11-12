@@ -1,6 +1,6 @@
-* [X] ~~*"Listening Only" mode.  Solution: App-based override.*~~
+http://104.236.158.9/darkcloud
 
-Angular 
+* [X] ~~*"Listening Only" mode.  Solution: App-based override.*~~
 * [X] ~~*Create new apps*~~
 * [X] ~~*Universal blacklist, share across all apps.*~~
     - [X] ~~*Repurpose `is_blacklisted` field, so it's no longer used for IP-based redirect logic.*~~
@@ -18,6 +18,11 @@ Possible Ideas:
 * [ ] Search in the IPs table, i.e. all blacklisted or none blacklisted.
 
 
+BUGS:
 
-Required:
-???
+* [ ] The "appName" redirect for different apps isn't working
+    - http://104.236.158.9/?appName=test isn't redirecting to reddit but it should.
+* [ ] Will never redirect first request. Is this an issue?
+    - Idea: Just return the "default_blacklist / redirect_app" value?
+
+

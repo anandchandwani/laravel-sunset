@@ -20,12 +20,13 @@ class TrackIP
         $ipRecord = app('db')->select("select * from ips where ip = '$ip'");
         $alreadyExists = count($ipRecord);
 
+        $identifier = $request->input('appName');
+        
+        if ($identifier == null){
+            $identifier = "default";
+        }
+
         if (!$alreadyExists){
-            $identifier = $request->input('appName');
-            
-            if ($identifier == null){
-                $identifier = "default";
-            }
             
             $app = app('db')->select("select * from apps where name = '$identifier'");
 

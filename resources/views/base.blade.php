@@ -38,7 +38,7 @@
                         <a href="darkcloud/">Dashboard</a>
                     </li>
                     <li role="presentation">
-                        <a href="darkcloud/options">Options - TODO</a>
+                        <a href="darkcloud/options">Options</a>
                     </li>
                     <li>
                         <a onclick="toggleDarkmode()">Toggle Darkmode</a>

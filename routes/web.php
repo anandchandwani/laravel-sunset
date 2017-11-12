@@ -15,7 +15,7 @@ $router->get('/', 'MainController@get');
 $router->get('/clear', function () use ($router) {
     app('db')->delete("delete from requests");
     app('db')->delete("delete from ips");
-    return "All ips and requests deleted, this is for development testing only.";
+    return "All ips and requests deleted.";
 });
 
 
