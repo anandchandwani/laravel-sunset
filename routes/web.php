@@ -36,6 +36,7 @@ function () use ($router) {
 }]);
 
 $router->get('/darkcloud_angular', function () use ($router) {
+    die('testing...');
     return view('index');
 });
 
