@@ -46,7 +46,7 @@ class MainController extends Controller
 }
 
 function noRedirectResponse(){
-     return "You're not being blacklisted, no reason to redirect.";
+    // return "You're not being blacklisted, no reason to redirect.";
     return null;
 }
 
