@@ -39,7 +39,7 @@ $router->get('/darkcloud_angular', function () use ($router) {
     return view('index');
 });
 
-$router->get('/darkcloud', function () use ($router) {
+$router->get('/darkcloud', ['middleware' => 'auth', function () use ($router) {
     $ips = app('db')->select("SELECT * FROM ips");
     $requests = app('db')->select("SELECT * FROM requests");
     $apps = app('db')->select("SELECT * FROM apps");
@@ -49,7 +49,7 @@ $router->get('/darkcloud', function () use ($router) {
         'requests' => $requests,
         'apps' => $apps
     ]);
-});
+}]);
 
 
 
