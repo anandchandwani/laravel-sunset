@@ -11,6 +11,10 @@ data-editable-url="/darkcloud/api/apps/">
             data-editable="true"
             data-editable-title="Each app should make a GET request to the darkcloud URL with an 'appName' field, which corresponds to this name field to determine which app it is.  If 'appName' is omitted then 'default' is used. Example: `http://IP-GOES-HERE/?appName=test`">
             name</th>
+        <th data-field="app_name"
+            data-editable="true"
+            data-editable-title="">
+            app_name</th>
         <th data-field="default_redirect_url"
             data-editable="true">
             default_redirect_url</th>
