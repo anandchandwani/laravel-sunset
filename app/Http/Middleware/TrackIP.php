@@ -27,7 +27,9 @@ class TrackIP
         }
 
         if (!$alreadyExists){
-            
+
+            echo $identifier;
+            die();
             $app = app('db')->select("select * from apps where name = '$identifier'");
 
             //If identifier is a non-matching string
