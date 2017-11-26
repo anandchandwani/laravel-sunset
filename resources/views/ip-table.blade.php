@@ -2,18 +2,19 @@
 @if (count($ips))
 <!-- <table class="table sortable-theme-bootstrap" data-sortable> -->
 
-<div class="btn-group">
-    <label>IP:
-        <input type="text" class="form-control filter-input" name="ip" id="ip-filter-control">
-    </label>
-    <label>os:
-        <input type="text" class="form-control filter-input" name="os" id="os-filter-control">
-    </label>
-    <label>country:
-        <input type="text" class="form-control filter-input" name="country" id="country-filter-control">
-    </label>
+<form class="form-inline">
+    {{--<label>IP:--}}
+        {{--<input type="text" class="form-control filter-input" name="ip" id="ip-filter-control">--}}
+    {{--</label>--}}
+    {{--<label>os:--}}
+        {{--<input type="text" class="form-control filter-input" name="os" id="os-filter-control">--}}
+    {{--</label>--}}
+    {{--<label>country:--}}
+        {{--<input type="text" class="form-control filter-input" name="country" id="country-filter-control">--}}
+    {{--</label>--}}
     <label>app_id:
         <select name="app_id" id="app_id-filter-control" class="filter-input form-control">
+            <option value="">All</option>
             @foreach ($apps as $app)
             <option value="{{$app->id}}">{{$app->app_name}}</option>
             @endforeach
@@ -25,10 +26,10 @@
             <option value="1">No</option>
         </select>
     </label>
-    <label>redirect_url:
-        <input type="text" class="form-control filter-input" name="redirect_url" id="redirect_url-filter-control">
-    </label>
-</div>
+    {{--<label>redirect_url:--}}
+        {{--<input type="text" class="form-control filter-input" name="redirect_url" id="redirect_url-filter-control">--}}
+    {{--</label>--}}
+</form>
 
 <table id="ipTable" class="table"
 data-url="/darkcloud/api/ip" 
