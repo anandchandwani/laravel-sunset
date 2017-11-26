@@ -3,8 +3,8 @@
 <!-- <table class="table sortable-theme-bootstrap" data-sortable> -->
 <script>
     var blacklistedOptions = {
-        '0': 'No',
-        '1': 'Yes'
+        0: 'No',
+        1: 'Yes'
     };
     var campaignOptions = {
         129: '129',
@@ -32,7 +32,7 @@ data-filter-show-clear="true">
             <th data-field="campaign_id">campaign_id</th>
             <th
             data-field="is_blacklisted"
-            data-editable="true"
+            data-editable="false"
             data-filter-control="select"
             data-filter-data="var:blacklistedOptions"
             data-editable-type="select"
