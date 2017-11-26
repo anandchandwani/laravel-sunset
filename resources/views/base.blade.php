@@ -23,6 +23,7 @@
 
     <script src="/bootstrap-table-master/dist/bootstrap-table.js"></script>
     <script src="/bootstrap-table-master/dist/extensions/editable/bootstrap-table-editable.js"></script>
+    <script src="/bootstrap-table-master/dist/extensions/filter/bootstrap-table-filter.js"></script>
     <script src="/bootstrap-table-master/dist/locale/bootstrap-table-en-US.js"></script>
     <link rel="stylesheet" href="/bootstrap-table-master/dist/bootstrap-table.css" />
 </head>
