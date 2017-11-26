@@ -88,6 +88,6 @@ $router->post('/darkcloud/api/apps/create', 'AppsController@createApp');
 
 $router->delete('/darkcloud/api/apps', 'AppsController@delete');
 
-$router->delete('/darkcloud/api/ip/', 'AppsController@delete');
+$router->delete('/darkcloud/api/ip/', 'IPController@delete');
 
 
