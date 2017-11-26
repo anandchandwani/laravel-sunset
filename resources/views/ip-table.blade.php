@@ -4,24 +4,29 @@
 <table id="ipTable" class="table" 
 data-url="/darkcloud/api/ip" 
 data-id-field="id"
-data-editable-url="/darkcloud/api/ip/">
+data-editable-url="/darkcloud/api/ip/"
+data-filter-control="true"
+data-filter-show-clear="true">
     <thead>
-        <!-- <th data-field="checked" data-checkbox="true"></th> -->
-        <th data-field="id">ID</th>
-        <th data-field="ip">IP</th>
-        <th data-field="os">os</th>
-        <th data-field="country">country</th>
-        <th data-field="time">time</th>
-        <th data-field="campaign_id">campaign_id</th>
-        <th
-        data-field="is_blacklisted" 
-        data-editable="true"
-        data-editable-type="select"
-        data-editable-title="Blacklist this IP? The IP will NEVER be redirected."
-        data-editable-source="[{value: 0, text: 'No'}, {value: 1, text: 'Yes'}]"
-        >is_blacklisted</th>
-        <th data-field="redirect_url" data-editable="true">redirect_url</th>
-        <th data-field="state" data-checkbox="true"></th>
+        <tr>
+            <!-- <th data-field="checked" data-checkbox="true"></th> -->
+            <th data-field="id">ID</th>
+            <th data-field="ip">IP</th>
+            <th data-field="os">os</th>
+            <th data-field="country">country</th>
+            <th data-field="time">time</th>
+            <th data-field="campaign_id">campaign_id</th>
+            <th
+            data-field="is_blacklisted"
+            data-editable="true"
+            data-filter-control="select"
+            data-editable-type="select"
+            data-editable-title="Blacklist this IP? The IP will NEVER be redirected."
+            data-editable-source="[{value: 0, text: 'No'}, {value: 1, text: 'Yes'}]"
+            >is_blacklisted</th>
+            <th data-field="redirect_url" data-editable="true">redirect_url</th>
+            <th data-field="state" data-checkbox="true"></th>
+        </tr>
     </thead>
     {{--<tbody>--}}
         {{--@foreach ($ips as $item)--}}
