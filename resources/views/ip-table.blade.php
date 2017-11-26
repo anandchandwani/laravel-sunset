@@ -14,7 +14,10 @@ data-filter-show-clear="true">
             {{--data-filter-control="select"--}}
             {{--data-filter-data="var:campaignOptions"--}}
             >ID</th>
-            <th data-field="ip">IP</th>
+            <th data-field="ip">
+                <label for="ip-filter-control">IP</label>
+                <input type="text" class="filter-input" name="ip" id="ip-filter-control">
+            </th>
             <th data-field="os">os</th>
             <th data-field="country">country</th>
             <th data-field="time">time</th>
@@ -112,9 +115,9 @@ data-filter-show-clear="true">
             return params;
         }
 
-//        $('.filterControls input, .filterControls select').on('change', function() {
-//            $('#ipTable').bootstrapTable('refresh', collectFilterParams());
-//        })
+        $('input.filter-input').on('change', function() {
+            $('#ipTable').bootstrapTable('refresh', {ip:$(this).val()});
+        })
     });
 
 
