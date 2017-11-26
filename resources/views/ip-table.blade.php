@@ -31,25 +31,25 @@ data-filter-show-clear="true">
             <th data-field="redirect_url" data-editable="true">redirect_url</th>
             <th data-field="state" data-checkbox="true"></th>
         </tr>
-        <tr class="filterControls">
-            <th></th>
-            <th><input type="text" name="ip" id="ip-filter-control"></th>
-            <th><input type="text" name="os" id="os-filter-control"></th>
-            <th><input type="text" name="country" id="country-filter-control"></th>
-            <th></th>
-            <th><select>
+        {{--<tr class="filterControls">--}}
+            {{--<th></th>--}}
+            {{--<th><input type="text" name="ip" id="ip-filter-control"></th>--}}
+            {{--<th><input type="text" name="os" id="os-filter-control"></th>--}}
+            {{--<th><input type="text" name="country" id="country-filter-control"></th>--}}
+            {{--<th></th>--}}
+            {{--<th><select>--}}
 
-                </select>
-            </th>
-            <th>
-                <select name="is_blacklisted" id="is_blacklisted-filter-control">
-                    <option value="1">Yes</option>
-                    <option value="0">No</option>
-                </select>
-            </th>
-            <th><input type="text" name="redirect_url" id="redirect_url-filter-control"></th>
-            <th></th>
-        </tr>
+                {{--</select>--}}
+            {{--</th>--}}
+            {{--<th>--}}
+                {{--<select name="is_blacklisted" id="is_blacklisted-filter-control">--}}
+                    {{--<option value="1">Yes</option>--}}
+                    {{--<option value="0">No</option>--}}
+                {{--</select>--}}
+            {{--</th>--}}
+            {{--<th><input type="text" name="redirect_url" id="redirect_url-filter-control"></th>--}}
+            {{--<th></th>--}}
+        {{--</tr>--}}
     </thead>
     {{--<tbody>--}}
         {{--@foreach ($ips as $item)--}}
