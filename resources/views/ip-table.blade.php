@@ -116,7 +116,7 @@ data-filter-show-clear="true">
         }
 
         $('input.filter-input').on('change', function() {
-            $('#ipTable').bootstrapTable('refresh', {ip:$(this).val()});
+            $('#ipTable').bootstrapTable('refresh', {query:{ip:$(this).val()}});
         })
     });
 
