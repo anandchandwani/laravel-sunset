@@ -11,8 +11,8 @@
     <input type="text" class="form-control filter-input" name="country" id="country-filter-control">
     <label for="app_id-filter-control">app_id:</label>
     <select name="app_id" id="app_id-filter-control" class="filter-input form-control">
-        @foreach ($apps as $id => $name)
-        <option value="{{$id}}">{{$name}}</option>
+        @foreach ($apps as $app)
+        <option value="{{$app->id}}">{{$app->app_name}}</option>
         @endforeach
     </select>
     <label for="is_blacklisted-filter-control">is_blacklisted:</label>
