@@ -1,7 +1,18 @@
 <h3>IPs Table</h3>
 @if (count($ips))
 <!-- <table class="table sortable-theme-bootstrap" data-sortable> -->
-<table id="ipTable" class="table" 
+<script>
+    var blacklistedOptions = {
+        0: 'No',
+        1: 'Yes'
+    };
+    var campaignOptions = {
+        129: '129',
+        130: '130'
+    }
+</script>
+
+<table id="ipTable" class="table"
 data-url="/darkcloud/api/ip" 
 data-id-field="id"
 data-editable-url="/darkcloud/api/ip/"
@@ -10,7 +21,10 @@ data-filter-show-clear="true">
     <thead>
         <tr>
             <!-- <th data-field="checked" data-checkbox="true"></th> -->
-            <th data-field="id">ID</th>
+            <th data-field="id"
+            data-filter-control="select"
+            data-filter-data="var:campaignOptions"
+            >ID</th>
             <th data-field="ip">IP</th>
             <th data-field="os">os</th>
             <th data-field="country">country</th>
@@ -20,6 +34,7 @@ data-filter-show-clear="true">
             data-field="is_blacklisted"
             data-editable="true"
             data-filter-control="select"
+            data-filter-data="var:blacklistedOptions"
             data-editable-type="select"
             data-editable-title="Blacklist this IP? The IP will NEVER be redirected."
             data-editable-source="[{value: 0, text: 'No'}, {value: 1, text: 'Yes'}]"
