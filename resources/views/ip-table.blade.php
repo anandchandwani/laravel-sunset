@@ -9,7 +9,7 @@ data-filter-control="true"
 data-filter-show-clear="true">
     <thead>
         <tr>
-            <th data-field="id">ID</th>
+            <th data-field="id">ID<br><br><br></th>
             <th data-field="ip">
                 <label for="ip-filter-control">IP</label>
                 <br>
@@ -25,7 +25,7 @@ data-filter-show-clear="true">
                 <br>
                 <input type="text" class="form-control filter-input" name="country" id="country-filter-control">
             </th>
-            <th data-field="time">time<br><br></th>
+            <th data-field="time">time<br><br><br></th>
             <th data-field="campaign_id">
                 <label for="campaign_id-filter-control">campaign_id</label>
                 <br>
@@ -116,7 +116,7 @@ data-filter-show-clear="true">
         }
 
         var ipsFilterParams = Object.create(null);
-        $('input.filter-input').on('change', function() {
+        $('.filter-input').on('change', function() {
             ipsFilterParams[$(this).attr('name')] = $(this).val();
             for (var param in ipsFilterParams) {
                 if (ipsFilterParams[param] == '')
