@@ -22,6 +22,7 @@ data-editable-url="/darkcloud/api/ip/">
         data-editable-source="[{value: 0, text: 'No'}, {value: 1, text: 'Yes'}]"
         >is_blacklisted</th>
         <th data-field="redirect_url" data-editable="true">redirect_url</th>
+        <th data-field="state" data-checkbox="true"></th>
     </thead>
     <tbody>
         @foreach ($ips as $item)
@@ -41,4 +42,35 @@ data-editable-url="/darkcloud/api/ip/">
         @endforeach
     </tbody>
 </table>
+<div class="btn-group" role="group" aria-label="...">
+    <button type="submit" name="app" value="create" class="btn btn-default btn-danger delete-apps">
+        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+        Delete Selected IPs
+    </button>
+</div>
 @else No ip data. @endif
+
+<script>
+    $(document).on('ready', function(){
+
+        $('.delete-ips').click(function(e){
+            let ids = $('#ipTable').bootstrapTable('getSelections').map(x => x.id);
+            $.ajax({
+                url: '/darkcloud/api/ips',
+                type: 'DELETE',
+                data: {ids: ids},
+                success: function(res){
+                    $('#ipTable').bootstrapTable('refresh');
+                    $('.delete-ips').attr('disabled', true);
+                }
+            });
+        });
+
+        $('#ipTable').on('check.bs.table uncheck.bs.table', handleDeleteIpBtn);
+        function handleDeleteIpBtn(){
+            const disable = !$('#ipTable').bootstrapTable('getSelections').length;
+            $('.delete-ips').attr('disabled', disable);
+        }
+        handleDeleteIpBtn();
+    });
+</script>
