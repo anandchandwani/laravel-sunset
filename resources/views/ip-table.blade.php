@@ -57,7 +57,7 @@ data-editable-url="/darkcloud/api/ip/">
         $('.delete-ips').click(function(e){
             let ids = $('#ipTable').bootstrapTable('getSelections').map(x => x.id);
             $.ajax({
-                url: '/darkcloud/api/ips',
+                url: '/darkcloud/api/ip',
                 type: 'DELETE',
                 data: {ids: ids},
                 success: function(res){
