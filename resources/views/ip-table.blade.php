@@ -17,7 +17,6 @@ data-editable-url="/darkcloud/api/ip/">
         data-field="is_blacklisted" 
         data-editable="true"
         data-editable-type="select"
-        
         data-editable-title="Blacklist this IP? The IP will NEVER be redirected."
         data-editable-source="[{value: 0, text: 'No'}, {value: 1, text: 'Yes'}]"
         >is_blacklisted</th>
@@ -46,7 +45,7 @@ data-editable-url="/darkcloud/api/ip/">
 <br>
 
 <div class="btn-group" role="group" aria-label="...">
-    <button type="submit" name="app" value="create" class="btn btn-default btn-danger delete-apps">
+    <button type="submit" name="app" value="create" class="btn btn-default btn-danger delete-ips">
         <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
         Delete Selected IPs
     </button>
@@ -55,7 +54,6 @@ data-editable-url="/darkcloud/api/ip/">
 
 <script>
     $(document).on('ready', function(){
-
         $('.delete-ips').click(function(e){
             let ids = $('#ipTable').bootstrapTable('getSelections').map(x => x.id);
             $.ajax({
