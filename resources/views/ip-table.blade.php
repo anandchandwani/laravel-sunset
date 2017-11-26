@@ -112,9 +112,9 @@ data-filter-show-clear="true">
             return params;
         }
 
-        $('.filterControls input, .filterControls select').on('change', function() {
-            $('#ipTable').bootstrapTable('refresh', collectFilterParams());
-        })
+//        $('.filterControls input, .filterControls select').on('change', function() {
+//            $('#ipTable').bootstrapTable('refresh', collectFilterParams());
+//        })
     });
 
 
