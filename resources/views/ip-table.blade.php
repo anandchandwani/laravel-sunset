@@ -9,50 +9,50 @@ data-filter-control="true"
 data-filter-show-clear="true">
     <thead>
         <tr>
-            <!-- <th data-field="checked" data-checkbox="true"></th> -->
-            <th data-field="id"
-            {{--data-filter-control="select"--}}
-            {{--data-filter-data="var:campaignOptions"--}}
-            >ID</th>
+            <th data-field="id">ID</th>
             <th data-field="ip">
                 <label for="ip-filter-control">IP</label>
-                <input type="text" class="filter-input" name="ip" id="ip-filter-control">
+                <br>
+                <input type="text" class="form-control filter-input" name="ip" id="ip-filter-control">
             </th>
-            <th data-field="os">os</th>
-            <th data-field="country">country</th>
-            <th data-field="time">time</th>
-            <th data-field="campaign_id">campaign_id</th>
+            <th data-field="os">
+                <label for="os-filter-control">os</label>
+                <br>
+                <input type="text" class="form-control filter-input" name="os" id="os-filter-control">
+            </th>
+            <th data-field="country">
+                <label for="country-filter-control">country</label>
+                <br>
+                <input type="text" class="form-control filter-input" name="country" id="country-filter-control">
+            </th>
+            <th data-field="time">time<br><br></th>
+            <th data-field="campaign_id">
+                <label for="campaign_id-filter-control">campaign_id</label>
+                <br>
+                <select name="campaign_id" id="campaign_id-filter-control" class="filter-input form-control">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                </select>
+            </th>
             <th
             data-field="is_blacklisted"
             data-editable="true"
-            {{--data-filter-control="select"--}}
-            {{--data-filter-data="var:blacklistedOptions"--}}
             data-editable-type="select"
             data-editable-title="Blacklist this IP? The IP will NEVER be redirected."
-            data-editable-source="[{value: 0, text: 'No'}, {value: 1, text: 'Yes'}]"
-            >is_blacklisted</th>
-            <th data-field="redirect_url" data-editable="true">redirect_url</th>
+            data-editable-source="[{value: 0, text: 'No'}, {value: 1, text: 'Yes'}]">
+                <label for="is_blacklisted-filter-control">is_blacklisted</label>
+                <br>
+                <select name="is_blacklisted" id="is_blacklisted-filter-control" class="filter-input form-control">
+                    <option value="0">Yes</option>
+                    <option value="1">No</option>
+                </select>
+            </th>
+            <th data-field="redirect_url" data-editable="true">
+                <label for="redirect_url-filter-control">redirect_url</label>
+                <input type="text" class="form-control filter-input" name="redirect_url" id="redirect_url-filter-control">
+            </th>
             <th data-field="state" data-checkbox="true"></th>
         </tr>
-        {{--<tr class="filterControls">--}}
-            {{--<th></th>--}}
-            {{--<th><input type="text" name="ip" id="ip-filter-control"></th>--}}
-            {{--<th><input type="text" name="os" id="os-filter-control"></th>--}}
-            {{--<th><input type="text" name="country" id="country-filter-control"></th>--}}
-            {{--<th></th>--}}
-            {{--<th><select>--}}
-
-                {{--</select>--}}
-            {{--</th>--}}
-            {{--<th>--}}
-                {{--<select name="is_blacklisted" id="is_blacklisted-filter-control">--}}
-                    {{--<option value="1">Yes</option>--}}
-                    {{--<option value="0">No</option>--}}
-                {{--</select>--}}
-            {{--</th>--}}
-            {{--<th><input type="text" name="redirect_url" id="redirect_url-filter-control"></th>--}}
-            {{--<th></th>--}}
-        {{--</tr>--}}
     </thead>
     {{--<tbody>--}}
         {{--@foreach ($ips as $item)--}}
@@ -115,8 +115,14 @@ data-filter-show-clear="true">
             return params;
         }
 
+        var ipsFilterParams = Object.create(null);
         $('input.filter-input').on('change', function() {
-            $('#ipTable').bootstrapTable('refresh', {query:{ip:$(this).val()}});
+            ipsFilterParams[$(this).attr('name')] = $(this).val();
+            for (var param in ipsFilterParams) {
+                if (ipsFilterParams[param] == '')
+                    delete ipsFilterParams[param];
+            }
+            $('#ipTable').bootstrapTable('refresh', {query:ipsFilterParams});
         })
     });
 
