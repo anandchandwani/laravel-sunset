@@ -2,26 +2,32 @@
 @if (count($ips))
 <!-- <table class="table sortable-theme-bootstrap" data-sortable> -->
 
-<div class="btn-group" role="group">
-    <label for="ip-filter-control">IP:</label>
-    <input type="text" class="form-control filter-input" name="ip" id="ip-filter-control">
-    <label for="os-filter-control">os:</label>
-    <input type="text" class="form-control filter-input" name="os" id="os-filter-control">
-    <label for="country-filter-control">country:</label>
-    <input type="text" class="form-control filter-input" name="country" id="country-filter-control">
-    <label for="app_id-filter-control">app_id:</label>
-    <select name="app_id" id="app_id-filter-control" class="filter-input form-control">
-        @foreach ($apps as $app)
-        <option value="{{$app->id}}">{{$app->app_name}}</option>
-        @endforeach
-    </select>
-    <label for="is_blacklisted-filter-control">is_blacklisted:</label>
-    <select name="is_blacklisted" id="is_blacklisted-filter-control" class="filter-input form-control">
-        <option value="0">Yes</option>
-        <option value="1">No</option>
-    </select>
-    <label for="redirect_url-filter-control">redirect_url:</label>
-    <input type="text" class="form-control filter-input" name="redirect_url" id="redirect_url-filter-control">
+<div class="btn-group">
+    <label>IP:
+        <input type="text" class="form-control filter-input" name="ip" id="ip-filter-control">
+    </label>
+    <label>os:
+        <input type="text" class="form-control filter-input" name="os" id="os-filter-control">
+    </label>
+    <label>country:
+        <input type="text" class="form-control filter-input" name="country" id="country-filter-control">
+    </label>
+    <label>app_id:
+        <select name="app_id" id="app_id-filter-control" class="filter-input form-control">
+            @foreach ($apps as $app)
+            <option value="{{$app->id}}">{{$app->app_name}}</option>
+            @endforeach
+        </select>
+    </label>
+    <label>is_blacklisted:
+        <select name="is_blacklisted" id="is_blacklisted-filter-control" class="filter-input form-control">
+            <option value="0">Yes</option>
+            <option value="1">No</option>
+        </select>
+    </label>
+    <label>redirect_url:
+        <input type="text" class="form-control filter-input" name="redirect_url" id="redirect_url-filter-control">
+    </label>
 </div>
 
 <table id="ipTable" class="table"
@@ -32,20 +38,18 @@ data-filter-control="true"
 data-filter-show-clear="true">
     <thead>
         <tr>
-            <th data-field="id">ID<br><br><br></th>
+            <th data-field="id">ID</th>
             <th data-field="ip">IP</th>
             <th data-field="os">os</th>
             <th data-field="country">country</th>
-            <th data-field="time">time<br><br><br></th>
+            <th data-field="time">time</th>
             <th data-field="app_id">app_id</th>
             <th
             data-field="is_blacklisted"
             data-editable="true"
             data-editable-type="select"
             data-editable-title="Blacklist this IP? The IP will NEVER be redirected."
-            data-editable-source="[{value: 0, text: 'No'}, {value: 1, text: 'Yes'}]">
-                is_blacklisted
-            </th>
+            data-editable-source="[{value: 0, text: 'No'}, {value: 1, text: 'Yes'}]">is_blacklisted</th>
             <th data-field="redirect_url" data-editable="true">redirect_url</th>
             <th data-field="state" data-checkbox="true"></th>
         </tr>
