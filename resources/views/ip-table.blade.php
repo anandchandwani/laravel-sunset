@@ -3,8 +3,8 @@
 <!-- <table class="table sortable-theme-bootstrap" data-sortable> -->
 <script>
     var blacklistedOptions = {
-        0: 'No',
-        1: 'Yes'
+        Yes: 'No',
+        No: 'Yes'
     };
     var campaignOptions = {
         129: '129',
