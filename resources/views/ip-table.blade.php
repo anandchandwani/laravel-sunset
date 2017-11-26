@@ -11,8 +11,8 @@ data-filter-show-clear="true">
         <tr>
             <!-- <th data-field="checked" data-checkbox="true"></th> -->
             <th data-field="id"
-            data-filter-control="select"
-            data-filter-data="var:campaignOptions"
+            {{--data-filter-control="select"--}}
+            {{--data-filter-data="var:campaignOptions"--}}
             >ID</th>
             <th data-field="ip">IP</th>
             <th data-field="os">os</th>
@@ -21,9 +21,9 @@ data-filter-show-clear="true">
             <th data-field="campaign_id">campaign_id</th>
             <th
             data-field="is_blacklisted"
-            data-editable="false"
-            data-filter-control="select"
-            data-filter-data="var:blacklistedOptions"
+            data-editable="true"
+            {{--data-filter-control="select"--}}
+            {{--data-filter-data="var:blacklistedOptions"--}}
             data-editable-type="select"
             data-editable-title="Blacklist this IP? The IP will NEVER be redirected."
             data-editable-source="[{value: 0, text: 'No'}, {value: 1, text: 'Yes'}]"
