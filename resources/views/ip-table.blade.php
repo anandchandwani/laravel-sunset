@@ -22,7 +22,7 @@ data-editable-url="/darkcloud/api/ip/">
         data-editable-source="[{value: 0, text: 'No'}, {value: 1, text: 'Yes'}]"
         >is_blacklisted</th>
         <th data-field="redirect_url" data-editable="true">redirect_url</th>
-        {{--<th data-field="state" data-checkbox="true"></th>--}}
+        <th data-field="state" data-checkbox="true"></th>
     </thead>
     {{--<tbody>--}}
         {{--@foreach ($ips as $item)--}}
