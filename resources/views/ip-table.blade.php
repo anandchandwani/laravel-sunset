@@ -9,7 +9,11 @@ data-editable-url="/darkcloud/api/ip/">
         <!-- <th data-field="checked" data-checkbox="true"></th> -->
         <th data-field="id">ID</th>
         <th data-field="ip">IP</th>
-        <th 
+        <th data-field="os">os</th>
+        <th data-field="country">country</th>
+        <th data-field="time">time</th>
+        <th data-field="campaign_id">campaign_id</th>
+        <th
         data-field="is_blacklisted" 
         data-editable="true"
         data-editable-type="select"
