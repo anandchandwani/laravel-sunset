@@ -26,10 +26,10 @@ data-filter-show-clear="true">
                 <input type="text" class="form-control filter-input" name="country" id="country-filter-control">
             </th>
             <th data-field="time">time<br><br><br></th>
-            <th data-field="campaign_id">
-                <label for="campaign_id-filter-control">campaign_id</label>
+            <th data-field="app_id">
+                <label for="app_id-filter-control">app_id</label>
                 <br>
-                <select name="campaign_id" id="campaign_id-filter-control" class="filter-input form-control">
+                <select name="app_id" id="app_id-filter-control" class="filter-input form-control">
                     <option value="1">1</option>
                     <option value="2">2</option>
                 </select>
