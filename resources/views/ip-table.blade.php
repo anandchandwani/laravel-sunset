@@ -1,17 +1,6 @@
 <h3>IPs Table</h3>
 @if (count($ips))
 <!-- <table class="table sortable-theme-bootstrap" data-sortable> -->
-<script>
-    var blacklistedOptions = {
-        0: 'No',
-        1: 'Yes'
-    };
-    var campaignOptions = {
-        129: '129',
-        130: '130'
-    }
-</script>
-
 <table id="ipTable" class="table"
 data-url="/darkcloud/api/ip" 
 data-id-field="id"
@@ -41,6 +30,25 @@ data-filter-show-clear="true">
             >is_blacklisted</th>
             <th data-field="redirect_url" data-editable="true">redirect_url</th>
             <th data-field="state" data-checkbox="true"></th>
+        </tr>
+        <tr class="filterControls">
+            <th></th>
+            <th><input type="text" name="ip" id="ip-filter-control"></th>
+            <th><input type="text" name="os" id="os-filter-control"></th>
+            <th><input type="text" name="country" id="country-filter-control"></th>
+            <th></th>
+            <th><select>
+
+                </select>
+            </th>
+            <th>
+                <select name="is_blacklisted" id="is_blacklisted-filter-control">
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </select>
+            </th>
+            <th><input type="text" name="redirect_url" id="redirect_url-filter-control"></th>
+            <th></th>
         </tr>
     </thead>
     {{--<tbody>--}}
@@ -88,10 +96,27 @@ data-filter-show-clear="true">
         });
 
         $('#ipTable').on('check.bs.table uncheck.bs.table', handleDeleteIpBtn);
+        console.log('checked');
         function handleDeleteIpBtn(){
             const disable = !$('#ipTable').bootstrapTable('getSelections').length;
             $('.delete-ips').attr('disabled', disable);
         }
         handleDeleteIpBtn();
+
+        function collectFilterParams() {
+            params = {};
+            $('.filterControls input').each(function (item) {
+                params[item.attr('name')] = item.val()
+            });
+            console.log(params);
+            return params;
+        }
+
+        $('.filterControls input, .filterControls select').on('change', function() {
+            $('#ipTable').bootstrapTable('refresh', collectFilterParams());
+        })
     });
+
+
+
 </script>
