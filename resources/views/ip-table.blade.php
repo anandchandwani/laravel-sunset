@@ -1,6 +1,29 @@
 <h3>IPs Table</h3>
 @if (count($ips))
 <!-- <table class="table sortable-theme-bootstrap" data-sortable> -->
+
+<div class="btn-group" role="group">
+    <label for="ip-filter-control">IP:</label>
+    <input type="text" class="form-control filter-input" name="ip" id="ip-filter-control">
+    <label for="os-filter-control">os:</label>
+    <input type="text" class="form-control filter-input" name="os" id="os-filter-control">
+    <label for="country-filter-control">country:</label>
+    <input type="text" class="form-control filter-input" name="country" id="country-filter-control">
+    <label for="app_id-filter-control">app_id:</label>
+    <select name="app_id" id="app_id-filter-control" class="filter-input form-control">
+        @foreach ($apps as $id => $name)
+        <option value="{{$id}}">{{$name}}</option>
+        @endforeach
+    </select>
+    <label for="is_blacklisted-filter-control">is_blacklisted:</label>
+    <select name="is_blacklisted" id="is_blacklisted-filter-control" class="filter-input form-control">
+        <option value="0">Yes</option>
+        <option value="1">No</option>
+    </select>
+    <label for="redirect_url-filter-control">redirect_url:</label>
+    <input type="text" class="form-control filter-input" name="redirect_url" id="redirect_url-filter-control">
+</div>
+
 <table id="ipTable" class="table"
 data-url="/darkcloud/api/ip" 
 data-id-field="id"
@@ -10,47 +33,20 @@ data-filter-show-clear="true">
     <thead>
         <tr>
             <th data-field="id">ID<br><br><br></th>
-            <th data-field="ip">
-                <label for="ip-filter-control">IP</label>
-                <br>
-                <input type="text" class="form-control filter-input" name="ip" id="ip-filter-control">
-            </th>
-            <th data-field="os">
-                <label for="os-filter-control">os</label>
-                <br>
-                <input type="text" class="form-control filter-input" name="os" id="os-filter-control">
-            </th>
-            <th data-field="country">
-                <label for="country-filter-control">country</label>
-                <br>
-                <input type="text" class="form-control filter-input" name="country" id="country-filter-control">
-            </th>
+            <th data-field="ip">IP</th>
+            <th data-field="os">os</th>
+            <th data-field="country">country</th>
             <th data-field="time">time<br><br><br></th>
-            <th data-field="app_id">
-                <label for="app_id-filter-control">app_id</label>
-                <br>
-                <select name="app_id" id="app_id-filter-control" class="filter-input form-control">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                </select>
-            </th>
+            <th data-field="app_id">app_id</th>
             <th
             data-field="is_blacklisted"
             data-editable="true"
             data-editable-type="select"
             data-editable-title="Blacklist this IP? The IP will NEVER be redirected."
             data-editable-source="[{value: 0, text: 'No'}, {value: 1, text: 'Yes'}]">
-                <label for="is_blacklisted-filter-control">is_blacklisted</label>
-                <br>
-                <select name="is_blacklisted" id="is_blacklisted-filter-control" class="filter-input form-control">
-                    <option value="0">Yes</option>
-                    <option value="1">No</option>
-                </select>
+                is_blacklisted
             </th>
-            <th data-field="redirect_url" data-editable="true">
-                <label for="redirect_url-filter-control">redirect_url</label>
-                <input type="text" class="form-control filter-input" name="redirect_url" id="redirect_url-filter-control">
-            </th>
+            <th data-field="redirect_url" data-editable="true">redirect_url</th>
             <th data-field="state" data-checkbox="true"></th>
         </tr>
     </thead>
