@@ -35,16 +35,16 @@ class IPController extends Controller
         if ($is_blacklisted = $request->input('is_blacklisted')) {
             $params['is_blacklisted'] = $is_blacklisted;
         }
-        if ($params) {
-            $sql .= " WHERE ";
-            $clauses = [];
-            foreach ($params as $field => $value) {
-                $clauses[] = " $field = :$field ";
-            }
-            $sql .= implode(' AND ', $clauses);
-
-            return app('db')->select($sql, $params);
-        }
+//        if ($params) {
+//            $sql .= " WHERE ";
+//            $clauses = [];
+//            foreach ($params as $field => $value) {
+//                $clauses[] = " $field = :$field ";
+//            }
+//            $sql .= implode(' AND ', $clauses);
+//
+//            return app('db')->select($sql, $params);
+//        }
 
         return app('db')->select($sql);
     }
