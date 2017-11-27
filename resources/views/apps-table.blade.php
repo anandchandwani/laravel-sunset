@@ -77,7 +77,7 @@ data-editable-url="/darkcloud/api/apps/">
             });
         });
 
-        $('#appTable').on('check.bs.table uncheck.bs.table', handleDeleteBtn);
+        $('#appTable').on('check.bs.table check-all.bs.table uncheck-all.bs.table uncheck.bs.table', handleDeleteBtn);
         function handleDeleteBtn(){
             const disable = !$('#appTable').bootstrapTable('getSelections').length;
             $('.delete-apps').attr('disabled', disable);   

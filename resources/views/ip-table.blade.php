@@ -72,7 +72,7 @@ data-filter-show-clear="true">
             });
         });
 
-        $('#ipTable').on('check.bs.table uncheck.bs.table', handleDeleteIpBtn);
+        $('#ipTable').on('check.bs.table check-all.bs.table uncheck-all.bs.table uncheck.bs.table', handleDeleteIpBtn);
         console.log('checked');
         function handleDeleteIpBtn(){
             const disable = !$('#ipTable').bootstrapTable('getSelections').length;
