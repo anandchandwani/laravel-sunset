@@ -23,6 +23,7 @@
 <table id="ipTable" class="table"
 data-url="/darkcloud/api/ip" 
 data-id-field="id"
+data-show-export="true"
 data-editable-url="/darkcloud/api/ip/"
 data-filter-control="true"
 data-filter-show-clear="true">
