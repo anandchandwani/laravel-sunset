@@ -39,8 +39,8 @@ class Authenticate
         $users = $this->getUsers();
 
         if (empty($_SERVER['PHP_AUTH_DIGEST']) ||
-            !($data = $this->httpDigestParse($_SERVER['PHP_AUTH_DIGEST'])) ||
-            !isset($users[$data['username']])
+            empty($data = $this->httpDigestParse($_SERVER['PHP_AUTH_DIGEST'])) ||
+            empty($users[$data['username']])
         ) {
             $this->requireLogin($realm);
             die('Access denied.');
@@ -73,7 +73,7 @@ class Authenticate
 
     private function getUsers()
     {
-        return [env('USER', 'Adam123') => env('PASS', 'Adam123#')];
+        return [env('DARKCLOUD_USER', 'Adam123') => env('DARKCLOUD_PASS', 'Adam123#')];
     }
 
     private function requireLogin($realm)
