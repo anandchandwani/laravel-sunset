@@ -14,8 +14,8 @@
     <label>is_blacklisted:
         <select name="is_blacklisted" id="is_blacklisted-filter-control" class="filter-input form-control">
             <option value="">All</option>
-            <option value="0">Yes</option>
-            <option value="1">No</option>
+            <option value="1">Yes</option>
+            <option value="0">No</option>
         </select>
     </label>
 </form>

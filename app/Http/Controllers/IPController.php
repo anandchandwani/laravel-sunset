@@ -29,8 +29,8 @@ class IPController extends Controller
     public function all(Request $request){
         $sql = "SELECT * FROM " . $this->table;
         $params = [];
-        if ($campaign_id = $request->input('campaign_id')) {
-            $params['campaign_id'] = $campaign_id;
+        if ($campaign_id = $request->input('app_id')) {
+            $params['app_id'] = $campaign_id;
         }
         if ($is_blacklisted = $request->input('is_blacklisted')) {
             $params['is_blacklisted'] = $is_blacklisted;
