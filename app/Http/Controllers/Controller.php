@@ -18,7 +18,7 @@ class Controller extends BaseController
         $this->middleware('auth', ['except' => ['get']]);
     }
 
-    public function all(){
+    public function all(Request $request){
         return app('db')->select("SELECT * FROM " . $this->table);
     }
 
