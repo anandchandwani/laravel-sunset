@@ -26,22 +26,26 @@ class IPController extends Controller
         return;
     }
 
-//    public function all(Request $request){
-//        $sql = app('db')->table($this->table);
-//        $clauses = [];
-//        if ($ip = $request->input('ip')) {
-//            $clauses[] = ['ip', 'like', $ip . '%'];
-//        }
-//        if ($os = $request->input('os')) {
-//            $clauses[] = ['os', 'like', $os . '%'];
-//        }
-////        $country = $request->input('country');
-////        $campaign_id = $request->input('campaign_id');
-////        $is_blacklisted = $request->input('is_blacklisted');
-////        $redirect_url = $request->input('redirect_url');
-//
-//
-//
-//        return $sql->where($clauses)->get();
-//    }
+    public function all(Request $request){
+        $sql = "SELECT * FROM " . $this->table;
+        $params = [];
+        if ($campaign_id = $request->input('campaign_id')) {
+            $params['campaign_id'] = $campaign_id;
+        }
+        if ($is_blacklisted = $request->input('is_blacklisted')) {
+            $params['is_blacklisted'] = $is_blacklisted;
+        }
+        if ($params) {
+            $sql .= " WHERE ";
+            $clauses = [];
+            foreach ($params as $field => $value) {
+                $clauses[] = " $field = :$field ";
+            }
+            $sql .= implode(' AND ', $clauses);
+
+            return app('db')->select($sql, $params);
+        }
+
+        return app('db')->select($sql);
+    }
 }
