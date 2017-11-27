@@ -15,9 +15,8 @@ class AppsController extends Controller
      */
     public function __construct()
     {
+        parent::__construct();
     }
-
-
 
     public function post(Request $request){
         $id = $request->input('pk');

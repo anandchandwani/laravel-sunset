@@ -11,7 +11,7 @@ class MainController extends Controller
      */
     public function __construct()
     {
-        //
+        parent::__construct();
         $this->middleware('trackIP', ['only' => ['get']]);
         $this->middleware('trackRequest', ['only' => ['get']]);
     }
