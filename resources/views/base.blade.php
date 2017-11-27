@@ -23,6 +23,7 @@
 
     <script src="/bootstrap-table-master/dist/bootstrap-table.js"></script>
     <script src="/bootstrap-table-master/dist/extensions/editable/bootstrap-table-editable.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/TableExport/4.0.11/js/tableexport.min.js"></script>
     <script src="/bootstrap-table-master/dist/extensions/export/bootstrap-table-export.js"></script>
     <script src="/bootstrap-table-master/dist/locale/bootstrap-table-en-US.js"></script>
     <link rel="stylesheet" href="/bootstrap-table-master/dist/bootstrap-table.css" />
