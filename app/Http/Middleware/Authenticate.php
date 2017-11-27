@@ -35,16 +35,14 @@ class Authenticate
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        if (!isset($_SERVER['PHP_AUTH_USER']) || ($_SERVER['PHP_AUTH_PW'] !== 'mypass1')) {
-            header('WWW-Authenticate: Basic realm="My Realm"');
+        $user = isset($_SERVER['PHP_AUTH_USER']) ? $_SERVER['PHP_AUTH_USER'] : null;
+        $pass = isset($_SERVER['PHP_AUTH_PW']) ? $_SERVER['PHP_AUTH_PW'] : null;
+        if ($user !== 'Adam123' || $pass !== 'Adam123#') {
+            header('WWW-Authenticate: Basic realm="Protected zone"');
             header('HTTP/1.0 401 Unauthorized');
-            echo 'Access denied, go away';
+            echo 'Access denied';
             exit;
         }
-
-//        if ($this->auth->guard($guard)->guest()) {
-//            return response('Unauthorized.', 401);
-//        }
 
         return $next($request);
     }
