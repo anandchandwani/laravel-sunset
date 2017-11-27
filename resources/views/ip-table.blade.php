@@ -3,15 +3,6 @@
 <!-- <table class="table sortable-theme-bootstrap" data-sortable> -->
 
 <form class="form-inline">
-    {{--<label>IP:--}}
-        {{--<input type="text" class="form-control filter-input" name="ip" id="ip-filter-control">--}}
-    {{--</label>--}}
-    {{--<label>os:--}}
-        {{--<input type="text" class="form-control filter-input" name="os" id="os-filter-control">--}}
-    {{--</label>--}}
-    {{--<label>country:--}}
-        {{--<input type="text" class="form-control filter-input" name="country" id="country-filter-control">--}}
-    {{--</label>--}}
     <label>app_id:
         <select name="app_id" id="app_id-filter-control" class="filter-input form-control">
             <option value="">All</option>
@@ -22,13 +13,11 @@
     </label>
     <label>is_blacklisted:
         <select name="is_blacklisted" id="is_blacklisted-filter-control" class="filter-input form-control">
+            <option value="">All</option>
             <option value="0">Yes</option>
             <option value="1">No</option>
         </select>
     </label>
-    {{--<label>redirect_url:--}}
-        {{--<input type="text" class="form-control filter-input" name="redirect_url" id="redirect_url-filter-control">--}}
-    {{--</label>--}}
 </form>
 
 <table id="ipTable" class="table"
@@ -55,23 +44,6 @@ data-filter-show-clear="true">
             <th data-field="state" data-checkbox="true"></th>
         </tr>
     </thead>
-    {{--<tbody>--}}
-        {{--@foreach ($ips as $item)--}}
-        {{--<tr>--}}
-            {{--<td>{{$item->id}}</td>--}}
-            {{--<td>{{$item->ip}}</td>--}}
-            {{--<td>--}}
-                {{--<a href="#" data-name="is_blacklisted" data-type="select" data-pk="{{$item->id}}" data-url="/darkcloud/api/ip/" data-value="{{$item->is_blacklisted ? 1 : 0}}"--}}
-                    {{--data-source="[{value: 0, text: 'No'}, {value: 1, text: 'Yes'}]">--}}
-                {{--</a>--}}
-            {{--</td>--}}
-
-            {{--<td>--}}
-                {{--<a href="#" data-type="text" data-name="redirect_url" data-pk="{{$item->id}}" data-url="/darkcloud/api/ip/" data-title="Update redirect_url, change where the ip will be redirected to in the future.">{{$item->redirect_url}}</a>--}}
-            {{--</td>--}}
-        {{--</tr>--}}
-        {{--@endforeach--}}
-    {{--</tbody>--}}
 </table>
 
 <br>

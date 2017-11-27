@@ -35,9 +35,16 @@ class Authenticate
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        if ($this->auth->guard($guard)->guest()) {
-            return response('Unauthorized.', 401);
+        if (!isset($_SERVER['PHP_AUTH_USER'])) {
+            header('WWW-Authenticate: Basic realm="My Realm"');
+            header('HTTP/1.0 401 Unauthorized');
+            echo 'Access denied, go away';
+            exit;
         }
+
+//        if ($this->auth->guard($guard)->guest()) {
+//            return response('Unauthorized.', 401);
+//        }
 
         return $next($request);
     }
