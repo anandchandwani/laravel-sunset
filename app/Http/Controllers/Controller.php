@@ -13,6 +13,11 @@ class Controller extends BaseController
     protected $table = "";
     protected $index = "id";
 
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['get']]);
+    }
+
     public function all(){
         return app('db')->select("SELECT * FROM " . $this->table);
     }
