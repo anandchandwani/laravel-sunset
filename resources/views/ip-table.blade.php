@@ -7,7 +7,8 @@
         <select name="app_id" id="app_id-filter-control" class="filter-input form-control">
             <option value="">All</option>
             @foreach ($apps as $app)
-            <option value="{{$app->id}}">{{$app->app_name}}</option>
+{{--            <option value="{{$app->id}}">{{$app->app_name}}</option>--}}
+            <option value="{{$app->id}}">{{$app->id}}</option>
             @endforeach
         </select>
     </label>

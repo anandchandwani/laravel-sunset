@@ -36,14 +36,17 @@
         <div class="header clearfix">
             <nav>
                 <ul class="nav nav-pills pull-right">
-                    <li role="presentation" class="active">
+                    <li role="presentation" class="{{ app('request')->is('darkcloud') ? 'active' : '' }}">
                         <a href="darkcloud/">Dashboard</a>
                     </li>
-                    <li role="presentation">
+                    <li role="presentation" class="{{ app('request')->is('options') ? 'active' : '' }}">
                         <a href="darkcloud/options">Options</a>
                     </li>
                     <li>
                         <a onclick="toggleDarkmode()">Toggle Darkmode</a>
+                    </li>
+                    <li role="presentation", class="{{ app('request')->is('add-to-blacklist') ? 'active' : '' }}">
+                        <a href="darkcloud/add-to-blacklist">Add to blacklist</a>
                     </li>
                 </ul>
             </nav>
