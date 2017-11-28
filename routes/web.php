@@ -91,6 +91,4 @@ $router->delete('/darkcloud/api/apps', 'AppsController@delete');
 $router->delete('/darkcloud/api/ip/', 'IPController@delete');
 
 
-$router->get('/darkcloud/add-to-blacklist', ['middleware' => 'auth', function () use ($router) {
-    return view('add-to-blacklist');
-}]);
+$router->any('/darkcloud/add-to-blacklist', ['middleware' => 'auth', 'IPController@toBlackList']);
