@@ -62,7 +62,7 @@ data-editable-url="/darkcloud/api/apps/">
                     $('#appTable').bootstrapTable('refresh');
                 }
             })
-        })
+        });
 
         $('.delete-apps').click(function(e){
             let ids = $('#appTable').bootstrapTable('getSelections').map(x => x.id);
