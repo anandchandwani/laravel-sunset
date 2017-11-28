@@ -57,17 +57,17 @@ class IPController extends Controller
      */
     public function toBlackList(Request $request)
     {
-        if ($request->isMethod('post') && ($ip = $request->input('ip'))) {
-            $ipTemplate = str_replace('*', '_', $ip);
-            $sql = "UPDATE " . $this->table . " SET is_blacklisted = 1 WHERE ip LIKE :ipTemplate";
-            $status = app('db')->statement($sql, ['ipTemplate' => $ipTemplate])
-                ? 'success'
-                : 'fail';
-
-            return $request->ajax()
-                ? response()->json(['status' => $status])
-                : redirect('/darkcloud/add-to-blacklist?status=' . $status);
-        }
+//        if ($request->isMethod('post') && ($ip = $request->input('ip'))) {
+//            $ipTemplate = str_replace('*', '_', $ip);
+//            $sql = "UPDATE " . $this->table . " SET is_blacklisted = 1 WHERE ip LIKE :ipTemplate";
+//            $status = app('db')->statement($sql, ['ipTemplate' => $ipTemplate])
+//                ? 'success'
+//                : 'fail';
+//
+//            return $request->ajax()
+//                ? response()->json(['status' => $status])
+//                : redirect('/darkcloud/add-to-blacklist?status=' . $status);
+//        }
 
         return view('add-to-blacklist');
     }
