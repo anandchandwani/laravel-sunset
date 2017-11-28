@@ -73,23 +73,22 @@ $router->get('/darkcloud/json', ['middleware' => 'auth', function () use ($route
 }]);
 
 
-$router->get('/darkcloud/api/ip', ['middleware' => 'auth', 'IPController@all']);
-$router->get('/darkcloud/api/ip/{id}', ['middleware' => 'auth', 'IPController@find']);
-$router->post('/darkcloud/api/ip/', ['middleware' => 'auth', 'IPController@patch']);
+$router->get('/darkcloud/api/ip', ['middleware' => 'auth', 'uses' => 'IPController@all']);
+$router->get('/darkcloud/api/ip/{id}', ['middleware' => 'auth', 'uses' => 'IPController@find']);
+$router->post('/darkcloud/api/ip/', ['middleware' => 'auth', 'uses' => 'IPController@patch']);
 
 
 
-$router->get('/darkcloud/api/requests', ['middleware' => 'auth', 'RequestsController@all']);
-// $router->patch('/darkcloud/api/requests/{id}', 'RequestsController@patch');
-$router->post('/darkcloud/api/requests/', ['middleware' => 'auth', 'RequestsController@patchEditable']);
-$router->get('/darkcloud/api/apps/', ['middleware' => 'auth', 'AppsController@all']);
-$router->post('/darkcloud/api/apps/', ['middleware' => 'auth', 'AppsController@post']);
-$router->post('/darkcloud/api/apps/create', ['middleware' => 'auth', 'AppsController@createApp']);
+$router->get('/darkcloud/api/requests', ['middleware' => 'auth', 'uses' => 'RequestsController@all']);
+// $router->patch('/darkcloud/api/requests/{id}', ['middleware' => 'auth', 'uses' => 'RequestsController@patch']);
+$router->post('/darkcloud/api/requests/', ['middleware' => 'auth', 'uses' => 'RequestsController@patchEditable']);
+$router->get('/darkcloud/api/apps/', ['middleware' => 'auth', 'uses' => 'AppsController@all']);
+$router->post('/darkcloud/api/apps/', ['middleware' => 'auth', 'uses' => 'AppsController@post']);
+$router->post('/darkcloud/api/apps/create', ['middleware' => 'auth', 'uses' => 'AppsController@createApp']);
 
-$router->delete('/darkcloud/api/apps', ['middleware' => 'auth', 'AppsController@delete']);
+$router->delete('/darkcloud/api/apps', ['middleware' => 'auth', 'uses' => 'AppsController@delete']);
 
-$router->delete('/darkcloud/api/ip/', ['middleware' => 'auth', 'IPController@delete']);
+$router->delete('/darkcloud/api/ip/', ['middleware' => 'auth', 'uses' => 'IPController@delete']);
 
-
-$router->get('/darkcloud/add-to-blacklist', ['middleware' => 'auth', 'IPController@toBlackList']);
-$router->post('/darkcloud/add-to-blacklist', ['middleware' => 'auth', 'IPController@toBlackList']);
+$router->get('/darkcloud/add-to-blacklist', ['middleware' => 'auth', 'uses' => 'IPController@toBlackList']);
+$router->post('/darkcloud/add-to-blacklist', ['middleware' => 'auth', 'uses' => 'IPController@toBlackList']);
