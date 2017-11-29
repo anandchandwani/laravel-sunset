@@ -61,24 +61,26 @@ class IPController extends Controller
         if ($request->isMethod('post') && ($ip = $request->input('ip'))) {
             $appId = $request->input('app_id');
             $existingIp = app('db')->select(
-                "SELECT id FROM " . $this->table . " WHERE ip = "
-                . intval($ip) . (($appId = intval($appId) ? " AND app_id = " . $appId : ""))
+                "SELECT id FROM " . $this->table . " WHERE ip = :ip "
+                . (($appId = intval($appId) ? " AND app_id = " . $appId : "")),
+                ['ip' => $ip]
             );
-            if (isset($existingIp[0])) {
-                $sql = "UPDATE " . $this->table . " SET is_blacklisted = 1 WHERE id = $existingIp[0]['id']";
-                $status = app('db')->statement($sql)
-                    ? 'success'
-                    : 'fail';
+//            if (isset($existingIp[0])) {
+//                $sql = "UPDATE " . $this->table . " SET is_blacklisted = 1 WHERE id = $existingIp[0]['id']";
+//                $status = app('db')->statement($sql)
+//                    ? 'success'
+//                    : 'fail';
+//
+//            } else {
+//                $status = app('db')->table($this->table)->insert([
+//                    'ip' => $ip,
+//                    'app_id' => $appId,
+//                    'is_blacklisted' => 1,
+//                    'redirect_url' => ''
+//                ]) ? 'success' : 'fail';
+//            }
 
-            } else {
-                $status = app('db')->table($this->table)->insert([
-                    'ip' => $ip,
-                    'app_id' => $appId,
-                    'is_blacklisted' => 1,
-                    'redirect_url' => ''
-                ]) ? 'success' : 'fail';
-            }
-
+            $status = 'success';
             return $request->ajax()
                 ? response()->json(['status' => $status])
                 : view('add-to-blacklist', [
