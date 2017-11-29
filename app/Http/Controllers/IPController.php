@@ -69,8 +69,8 @@ class IPController extends Controller
             } catch (\Exception $e) {
                 $status = false;
             }
-            $status = $status || $updateExistingIp = app('db')
-                    ->update("UPDATE " . $this->table . " SET is_blacklisted = 1 WHERE ip = ':ip'", ['ip' => $ip]);
+            $status = $status || app('db')
+                    ->update("UPDATE " . $this->table . " SET is_blacklisted = 1 WHERE ip = :ip", ['ip' => $ip]);
 
             return $request->ajax()
                 ? response()->json(['status' => $status])
