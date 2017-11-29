@@ -58,25 +58,28 @@ class IPController extends Controller
     public function toBlackList(Request $request)
     {
         if ($request->isMethod('post') && ($ip = $request->input('ip')) && ($appId = $request->input('app_id'))) {
-            $existingIpId = app('db')->select(
+            $existingIp = app('db')->select(
                 "SELECT id FROM " . $this->table . " WHERE ip = "
                 . intval($ip) . (($appId = intval($appId) ? " AND app_id = " . $appId : ""))
             );
-            
-            print_r($existingIpId);
-            die;
-//            if ($existingIpId) {
-//                $sql = "UPDATE " . $this->table . " SET is_blacklisted = 1 WHERE id = $existingIpId";
-//                $status = app('db')->statement($sql, ['ipTemplate' => $ipTemplate])
-//                    ? 'success'
-//                    : 'fail';
-//
-//            }
-//            $ipTemplate = str_replace('*', '_', $ip);
+            if (isset($existingIp[0])) {
+                $sql = "UPDATE " . $this->table . " SET is_blacklisted = 1 WHERE id = $existingIp[0]['id']";
+                $status = app('db')->statement($sql)
+                    ? 'success'
+                    : 'fail';
 
-//            return $request->ajax()
-//                ? response()->json(['status' => $status])
-//                : redirect('/darkcloud/add-to-blacklist?status=' . $status);
+            } else {
+                $status = app('db')->table($this->table)->insert([
+                    'ip' => $ip,
+                    'app_id' => $appId,
+                    'is_blacklisted' => 1,
+                    'redirect_url' => ''
+                ]) ? 'success' : 'fail';
+            }
+
+            return $request->ajax()
+                ? response()->json(['status' => $status])
+                : redirect('/darkcloud/add-to-blacklist?status=' . $status);
         }
 
         return view('add-to-blacklist');
