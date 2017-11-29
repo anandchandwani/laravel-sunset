@@ -79,7 +79,7 @@ class IPController extends Controller
 
             return $request->ajax()
                 ? response()->json(['status' => $status])
-                : redirect('/darkcloud/add-to-blacklist?status=' . $status);
+                : view('add-to-blacklist', ['status' => $status]);
         }
 
         return view('add-to-blacklist');

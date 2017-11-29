@@ -14,8 +14,12 @@
     </form>
 
 </div>
-
-<script>
-
-</script>
+@if(isset($status) and isset($ip))
+    @if($status == 'success')
+        <script>alert('IP {{$ip}} was added to blacklist');</script>
+    @endif
+    @if($status == 'fail')
+        <script>alert('Cannot add IP {{$ip}} to blacklist');</script>
+    @endif
+@endif
 @endcomponent
