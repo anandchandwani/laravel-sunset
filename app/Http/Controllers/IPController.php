@@ -57,16 +57,26 @@ class IPController extends Controller
      */
     public function toBlackList(Request $request)
     {
-        if ($request->isMethod('post') && ($ip = $request->input('ip'))) {
-            $ipTemplate = str_replace('*', '_', $ip);
-            $sql = "UPDATE " . $this->table . " SET is_blacklisted = 1 WHERE ip LIKE :ipTemplate";
-            $status = app('db')->statement($sql, ['ipTemplate' => $ipTemplate])
-                ? 'success'
-                : 'fail';
+        if ($request->isMethod('post') && ($ip = $request->input('ip')) && ($appId = $request->input('app_id'))) {
+            $existingIpId = app('db')->select(
+                "SELECT id FROM " . $this->table . " WHERE ip = "
+                . intval($ip) . (($appId = intval($appId) ? " AND app_id = " . $appId : ""))
+            );
+            
+            print_r($existingIpId);
+            die;
+//            if ($existingIpId) {
+//                $sql = "UPDATE " . $this->table . " SET is_blacklisted = 1 WHERE id = $existingIpId";
+//                $status = app('db')->statement($sql, ['ipTemplate' => $ipTemplate])
+//                    ? 'success'
+//                    : 'fail';
+//
+//            }
+//            $ipTemplate = str_replace('*', '_', $ip);
 
-            return $request->ajax()
-                ? response()->json(['status' => $status])
-                : redirect('/darkcloud/add-to-blacklist?status=' . $status);
+//            return $request->ajax()
+//                ? response()->json(['status' => $status])
+//                : redirect('/darkcloud/add-to-blacklist?status=' . $status);
         }
 
         return view('add-to-blacklist');
