@@ -13,6 +13,10 @@ class TrackIP
      */
     public function handle($request, Closure $next)
     {
+        
+        return ["error" => true, 'message' => $request->server('HTTP_USER_AGENT')];
+
+
         $response = $next($request);
         $DEFAULT_APP_ID = 1;
         $ip = $request->ip();
