@@ -58,7 +58,8 @@ class IPController extends Controller
     public function toBlackList(Request $request)
     {
         $apps = app('db')->select("SELECT * FROM apps");
-        if ($request->isMethod('post') && ($ip = $request->input('ip')) && ($appId = $request->input('app_id'))) {
+        if ($request->isMethod('post') && ($ip = $request->input('ip'))) {
+            $appId = $request->input('app_id');
             $existingIp = app('db')->select(
                 "SELECT id FROM " . $this->table . " WHERE ip = "
                 . intval($ip) . (($appId = intval($appId) ? " AND app_id = " . $appId : ""))
