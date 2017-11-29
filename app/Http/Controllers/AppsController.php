@@ -23,6 +23,7 @@ class AppsController extends Controller
         $name = $request->input('name');
         $value = $request->input('value');
 
+        // Update redirect url in all ips, assigned to this app
         if ($name == 'default_redirect_url') {
             app('db')->update("update ips set redirect_url = '".$value."' where app_id = ".$id);
         }
