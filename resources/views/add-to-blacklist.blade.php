@@ -8,14 +8,14 @@
 
     <form class="form-inline" action="" method="post">
         <label>IP:<input type="text" name="ip" class="form-control"></label>
-        <label>app_id:
-            <select name="app_id" id="app_id-filter-control" class="filter-input form-control">
-                <option value="">All</option>
-                @foreach ($apps as $app)
-                    <option value="{{$app->id}}">{{$app->id}}</option>
-                @endforeach
-            </select>
-        </label>
+        {{--<label>app_id:--}}
+            {{--<select name="app_id" id="app_id-filter-control" class="filter-input form-control">--}}
+                {{--<option value="">All</option>--}}
+                {{--@foreach ($apps as $app)--}}
+                    {{--<option value="{{$app->id}}">{{$app->id}}</option>--}}
+                {{--@endforeach--}}
+            {{--</select>--}}
+        {{--</label>--}}
         <button type="submit" class="btn btn-danger">
             Add IPs to Blacklist
         </button>
