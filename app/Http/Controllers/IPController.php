@@ -57,6 +57,7 @@ class IPController extends Controller
      */
     public function toBlackList(Request $request)
     {
+        $apps = app('db')->select("SELECT * FROM apps");
         if ($request->isMethod('post') && ($ip = $request->input('ip')) && ($appId = $request->input('app_id'))) {
             $existingIp = app('db')->select(
                 "SELECT id FROM " . $this->table . " WHERE ip = "
@@ -79,9 +80,13 @@ class IPController extends Controller
 
             return $request->ajax()
                 ? response()->json(['status' => $status])
-                : view('add-to-blacklist', ['status' => $status]);
+                : view('add-to-blacklist', [
+                    'apps' => $apps,
+                    'ip' => $ip,
+                    'status' => $status
+                ]);
         }
 
-        return view('add-to-blacklist');
+        return view('add-to-blacklist', ['apps' => $apps]);
     }
 }
