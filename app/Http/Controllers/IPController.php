@@ -32,7 +32,9 @@ class IPController extends Controller
         if ($campaign_id = $request->input('app_id')) {
             $params['app_id'] = $campaign_id;
         }
-        if ($is_blacklisted = $request->input('is_blacklisted')) {
+
+        $is_blacklisted = $request->input('is_blacklisted', null);
+        if (!is_null($is_blacklisted)) { // Check on null, because can be boolean false or true
             $params['is_blacklisted'] = $is_blacklisted;
         }
         if ($params) {
