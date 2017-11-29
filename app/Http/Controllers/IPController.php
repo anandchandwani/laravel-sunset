@@ -72,15 +72,15 @@ class IPController extends Controller
 //                    : 'fail';
 //
 //            } else {
-//                $status = app('db')->table($this->table)->insert([
-//                    'ip' => $ip,
-//                    'app_id' => $appId,
-//                    'is_blacklisted' => 1,
-//                    'redirect_url' => ''
-//                ]) ? 'success' : 'fail';
+                $status = app('db')->table($this->table)->insert([
+                    'ip' => $ip,
+                    'app_id' => $appId,
+                    'is_blacklisted' => 1,
+                    'redirect_url' => ''
+                ]) ? 'success' : 'fail';
 //            }
 
-            $status = 'success';
+//            $status = 'success';
             return $request->ajax()
                 ? response()->json(['status' => $status])
                 : view('add-to-blacklist', [
