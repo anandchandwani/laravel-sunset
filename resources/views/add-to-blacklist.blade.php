@@ -3,7 +3,7 @@
 <div class="container">
     <div class="alert alert-danger" role="alert">
         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-        Here you can add an IP(s) to the blacklist manually. To add a diapason, substitute each unknown digit with wildcard ('*')
+        Here you can add an IP to the blacklist manually
     </div>
 
     <form class="form-inline" action="" method="post">
