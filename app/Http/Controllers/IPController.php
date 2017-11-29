@@ -61,10 +61,10 @@ class IPController extends Controller
         if ($request->isMethod('post') && ($ip = $request->input('ip'))) {
             $existingIp = app('db')->select("SELECT ID FROM " . $this->table . " WHERE ip = ':ip'", ['ip' => $ip]);
             if (isset($existingIp[0])) {
-                $sql = "UPDATE " . $this->table . " SET is_blacklisted = 1 WHERE ID = " . $existingIp[0]['ID'];
-                $status = app('db')->update($sql)
-                    ? 'success'
-                    : 'fail';
+//                $sql = "UPDATE " . $this->table . " SET is_blacklisted = 1 WHERE ID = " . $existingIp[0]['ID'];
+//                $status = app('db')->update($sql)
+//                    ? 'success'
+//                    : 'fail';
             } else {
 
                     $status = app('db')->table($this->table)->insert([
