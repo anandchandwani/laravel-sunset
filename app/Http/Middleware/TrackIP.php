@@ -14,12 +14,12 @@ class TrackIP
     public function handle($request, Closure $next)
     {
         
-        return ["error" => true, 'message' => $request->server('HTTP_USER_AGENT')];
 
 
         $response = $next($request);
         $DEFAULT_APP_ID = 1;
         $ip = $request->ip();
+        return ["error" => true, 'message' => json_encode($this->detectLocation($ip))];
 
         $ipRecord = app('db')->select("select * from ips where ip = '$ip'");
         $alreadyExists = count($ipRecord);
@@ -52,4 +52,24 @@ class TrackIP
 
         return $response;
     }
+
+    protected function detectLocation($ip)
+    {
+       try {
+           $curl = curl_init();
+           curl_setopt_array($curl, array(
+               CURLOPT_RETURNTRANSFER => 1,
+               CURLOPT_URL => 'http://freegeoip.net/json/' . $ip,
+               CURLOPT_USERAGENT => 'PHP',
+               CURLOPT_CONNECTTIMEOUT => 1,
+           ));
+           $result = curl_exec($curl);
+           $data = json_decode($result, true) ?: [];
+
+           return $data;
+       } catch (\Throwable $e) {
+           return [];
+       }
+    }
+
 }
