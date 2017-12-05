@@ -13,13 +13,14 @@ class TrackIP
      */
     public function handle($request, Closure $next)
     {
-        
-
-
         $response = $next($request);
         $DEFAULT_APP_ID = 1;
         $ip = $request->ip();
-        return ["error" => true, 'message' => json_encode($this->detectLocation($ip))];
+
+        $locationData = $this->detectLocation($ip);
+        $country = isset($locationData['country_name']) ? $locationData['country_name'] : null;
+        $countryCode = isset($locationData['country_code']) ? $locationData['country_code'] : null;
+        $city = isset($locationData['city']) ? $locationData['city'] : null;
 
         $ipRecord = app('db')->select("select * from ips where ip = '$ip'");
         $alreadyExists = count($ipRecord);
@@ -45,6 +46,8 @@ class TrackIP
             app('db')->table('ips')->insert([
                 'ip' => $request->ip(),
                 'app_id' => $app->id,
+                'country' => ($country?$country:'-').($countryCode?"($countryCode)":'').($city?", $city":''),
+                'time' => date('Y-m-d H:i:s', time()),
                 'is_blacklisted' => $app->default_blacklist,
                 'redirect_url' => $app->default_redirect_url
             ]);
