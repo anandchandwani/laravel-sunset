@@ -24,6 +24,9 @@
 <table id="ipTable" class="table"
 data-url="/darkcloud/api/ip" 
 data-id-field="id"
+data-pagination="true"
+data-page-size="20"
+data-side-pagination="server"
 data-show-export="true"
 data-editable-url="/darkcloud/api/ip/"
 data-filter-control="true"
@@ -74,7 +77,6 @@ data-filter-show-clear="true">
         });
 
         $('#ipTable').on('check.bs.table check-all.bs.table uncheck-all.bs.table uncheck.bs.table', handleDeleteIpBtn);
-        console.log('checked');
         function handleDeleteIpBtn(){
             const disable = !$('#ipTable').bootstrapTable('getSelections').length;
             $('.delete-ips').attr('disabled', disable);
@@ -86,7 +88,6 @@ data-filter-show-clear="true">
             $('.filterControls input').each(function (item) {
                 params[item.attr('name')] = item.val()
             });
-            console.log(params);
             return params;
         }
 

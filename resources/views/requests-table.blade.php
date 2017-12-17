@@ -1,6 +1,9 @@
 <h1>Request Redirects Table</h1>
 
-<table id="requestsTable" class="table" 
+<table id="requestsTable" class="table"
+data-pagination="true"
+data-page-size="20"
+data-side-pagination="server"
 data-url="/darkcloud/api/requests/" 
 data-id-field="id"
 data-editable-url="/darkcloud/api/requests/">
