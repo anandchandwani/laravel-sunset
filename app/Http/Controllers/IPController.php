@@ -48,8 +48,8 @@ class IPController extends Controller
         }
 
         // Handle pagination params
-        $offset = $request->input('is_blacklisted', null);
-        $limit = $request->input('is_blacklisted', null);
+        $offset = $request->input('offset', null);
+        $limit = $request->input('limit', null);
         if ($offset) {
             $sqlClause .= ' OFFSET ' . intval($offset);
         }

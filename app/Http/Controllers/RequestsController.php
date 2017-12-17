@@ -25,4 +25,25 @@ class RequestsController extends Controller
 
         return app('db')->update("update requests set ".$name." = '".$value."' where id = ".$id);
     }
+
+    public function all(Request $request){
+        $sqlClause = '';
+        // Handle pagination params
+        $offset = $request->input('offset', null);
+        $limit = $request->input('limit', null);
+        if ($offset) {
+            $sqlClause .= ' OFFSET ' . intval($offset);
+        }
+        if ($limit) {
+            $sqlClause .= ' LIMIT ' . intval($limit);
+        }
+
+        $count = app('db')->select("SELECT COUNT(*) AS total FROM " . $this->table . $sqlClause);
+        $rows = app('db')->select("SELECT * FROM " . $this->table . $sqlClause);
+
+        return [
+            'total' => $count[0]['total'],
+            'rows' => $rows
+        ];
+    }
 }
