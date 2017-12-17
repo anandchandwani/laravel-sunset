@@ -27,7 +27,7 @@ class IPController extends Controller
     }
 
     public function all(Request $request){
-        $filterClause = '';
+        $filterSql = '';
         $params = [];
 
         // Handle filter params and search
@@ -40,35 +40,35 @@ class IPController extends Controller
             $params['is_blacklisted'] = $is_blacklisted;
         }
         if ($params) {
-            $filterClause .= " WHERE ";
+            $filterSql .= " WHERE ";
             $clauses = [];
             foreach ($params as $field => $value) {
                 $clauses[] = " $field = :$field ";
             }
-            $filterClause .= implode(' AND ', $clauses);
+            $filterSql .= implode(' AND ', $clauses);
         } elseif ($search) {
-            $filterClause .= " WHERE ";
+            $filterSql .= " WHERE ";
             $clauses = [];
             foreach(['ip', 'os', 'country', 'redirect_url'] as $searchableField) {
                 $clauses[] = " $searchableField LIKE ':search%' ";
             }
             $params['search'] = $search;
-            $filterClause .= implode(' OR ', $clauses);
+            $filterSql .= implode(' OR ', $clauses);
         }
 
         // Handle pagination params
-        $paginationClause = '';
+        $paginationSql = '';
         $offset = $request->input('offset', null);
         $limit = $request->input('limit', null);
         if ($limit) {
-            $paginationClause .= ' LIMIT ' . intval($limit);
+            $paginationSql .= ' LIMIT ' . intval($limit);
         }
         if ($offset) {
-            $paginationClause .= ' OFFSET ' . intval($offset);
+            $paginationSql .= ' OFFSET ' . intval($offset);
         }
 
-        $count = app('db')->select("SELECT COUNT(*) AS total FROM " . $this->table . $filterClause, $params);
-        $rows = app('db')->select("SELECT * FROM " . $this->table . $filterClause . $paginationClause, $params);
+        $count = app('db')->select("SELECT COUNT(*) AS total FROM " . $this->table . $filterSql, $params);
+        $rows = app('db')->select("SELECT * FROM " . $this->table . $filterSql . $paginationSql, $params);
 
         return [
             'total' => $count[0]->total,

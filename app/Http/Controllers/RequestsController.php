@@ -27,7 +27,21 @@ class RequestsController extends Controller
     }
 
     public function all(Request $request){
+        $filterSql = '';
         $paginationSql = '';
+
+        // Handle search
+        $search = $request->input('search', null);
+        if ($search) {
+            $filterSql .= " WHERE ";
+            $clauses = [];
+            foreach(['redirected_to', 'created_at'] as $searchableField) {
+                $clauses[] = " $searchableField LIKE ':search%' ";
+            }
+            $params['search'] = $search;
+            $filterSql .= implode(' OR ', $clauses);
+        }
+
         // Handle pagination params
         $offset = $request->input('offset', null);
         $limit = $request->input('limit', null);
@@ -38,8 +52,8 @@ class RequestsController extends Controller
             $paginationSql .= ' OFFSET ' . intval($offset);
         }
 
-        $count = app('db')->select("SELECT COUNT(*) AS total FROM " . $this->table);
-        $rows = app('db')->select("SELECT * FROM " . $this->table . $paginationSql);
+        $count = app('db')->select("SELECT COUNT(*) AS total FROM " . $this->table . $filterSql);
+        $rows = app('db')->select("SELECT * FROM " . $this->table . $filterSql . $paginationSql);
 
         return [
             'total' => $count[0]->total,
