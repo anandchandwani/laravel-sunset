@@ -36,9 +36,9 @@ class RequestsController extends Controller
             $filterSql .= " WHERE ";
             $clauses = [];
             foreach(['redirected_to', 'created_at'] as $searchableField) {
-                $clauses[] = " $searchableField LIKE ':search%' ";
+                $clauses[] = " $searchableField LIKE :search ";
             }
-            $params['search'] = $search;
+            $params['search'] = "%$search%";
             $filterSql .= implode(' OR ', $clauses);
         }
 
