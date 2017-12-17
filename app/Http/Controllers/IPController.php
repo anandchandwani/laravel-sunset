@@ -30,7 +30,8 @@ class IPController extends Controller
         $filterClause = '';
         $params = [];
 
-        // Handle filter params
+        // Handle filter params and search
+        $search = $request->input('search', null);
         if ($campaign_id = $request->input('app_id')) {
             $params['app_id'] = $campaign_id;
         }
@@ -45,6 +46,14 @@ class IPController extends Controller
                 $clauses[] = " $field = :$field ";
             }
             $filterClause .= implode(' AND ', $clauses);
+        } elseif ($search) {
+            $filterClause .= " WHERE ";
+            $clauses = [];
+            foreach(['ip', 'os', 'country', 'redirect_url'] as $searchableField) {
+                $clauses[] = " $searchableField LIKE ':search%' ";
+            }
+            $params['search'] = $search;
+            $filterClause .= implode(' OR ', $clauses);
         }
 
         // Handle pagination params
