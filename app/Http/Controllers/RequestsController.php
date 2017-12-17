@@ -42,7 +42,7 @@ class RequestsController extends Controller
         $rows = app('db')->select("SELECT * FROM " . $this->table . $sqlClause);
 
         return [
-            'total' => $count[0]['total'],
+            'total' => $count[0]->total,
             'rows' => $rows
         ];
     }

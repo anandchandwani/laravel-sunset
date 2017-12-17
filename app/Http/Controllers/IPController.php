@@ -50,11 +50,11 @@ class IPController extends Controller
         // Handle pagination params
         $offset = $request->input('offset', null);
         $limit = $request->input('limit', null);
-        if ($offset) {
-            $sqlClause .= ' OFFSET ' . intval($offset);
-        }
         if ($limit) {
             $sqlClause .= ' LIMIT ' . intval($limit);
+        }
+        if ($offset) {
+            $sqlClause .= ' OFFSET ' . intval($offset);
         }
 
         $count = app('db')->select("SELECT COUNT(*) AS total FROM " . $this->table . $sqlClause, $params);
