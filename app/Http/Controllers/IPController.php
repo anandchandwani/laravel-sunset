@@ -54,6 +54,8 @@ class IPController extends Controller
             }
             $params['search'] = "%$search%";
             $filterSql .= implode(' OR ', $clauses);
+
+            die($filterSql);
         }
 
         // Handle pagination params
