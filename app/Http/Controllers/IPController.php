@@ -27,30 +27,42 @@ class IPController extends Controller
     }
 
     public function all(Request $request){
-        $sql = "SELECT * FROM " . $this->table;
+        $sqlClause = '';
         $params = [];
+
+        // Handle filter params
         if ($campaign_id = $request->input('app_id')) {
             $params['app_id'] = $campaign_id;
         }
-
         $is_blacklisted = $request->input('is_blacklisted', null);
         if (!is_null($is_blacklisted)) { // Check on null, because can be boolean false or true
             $params['is_blacklisted'] = $is_blacklisted;
         }
         if ($params) {
-            $sql .= " WHERE ";
+            $sqlClause .= " WHERE ";
             $clauses = [];
             foreach ($params as $field => $value) {
                 $clauses[] = " $field = :$field ";
             }
-            $sql .= implode(' AND ', $clauses);
-
-            return app('db')->select($sql, $params);
+            $sqlClause .= implode(' AND ', $clauses);
         }
 
+        // Handle pagination params
+        $offset = $request->input('is_blacklisted', null);
+        $limit = $request->input('is_blacklisted', null);
+        if ($offset) {
+            $sqlClause .= ' OFFSET ' . intval($offset);
+        }
+        if ($limit) {
+            $sqlClause .= ' LIMIT ' . intval($limit);
+        }
+
+        $count = app('db')->select("SELECT COUNT(*) FROM " . $this->table . $sqlClause, $params)[0];
+        $rows = app('db')->select("SELECT * FROM " . $this->table . $sqlClause, $params);
+
         return [
-            'total' => 2000,
-            'rows' => app('db')->select($sql)
+            'total' => $count,
+            'rows' => $rows
         ];
     }
 
