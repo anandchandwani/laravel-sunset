@@ -57,11 +57,11 @@ class IPController extends Controller
             $sqlClause .= ' LIMIT ' . intval($limit);
         }
 
-        $count = app('db')->select("SELECT COUNT(*) FROM " . $this->table . $sqlClause, $params)[0];
+        $count = app('db')->select("SELECT COUNT(*) AS total FROM " . $this->table . $sqlClause, $params);
         $rows = app('db')->select("SELECT * FROM " . $this->table . $sqlClause, $params);
 
         return [
-            'total' => $count,
+            'total' => $count['total'],
             'rows' => $rows
         ];
     }
