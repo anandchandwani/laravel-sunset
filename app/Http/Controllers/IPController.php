@@ -48,7 +48,10 @@ class IPController extends Controller
             return app('db')->select($sql, $params);
         }
 
-        return app('db')->select($sql);
+        return [
+            'total' => 2000,
+            'rows' => app('db')->select($sql)
+        ];
     }
 
     /**
