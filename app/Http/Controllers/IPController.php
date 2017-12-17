@@ -27,7 +27,7 @@ class IPController extends Controller
     }
 
     public function all(Request $request){
-        $sqlClause = '';
+        $filterClause = '';
         $params = [];
 
         // Handle filter params
@@ -39,28 +39,27 @@ class IPController extends Controller
             $params['is_blacklisted'] = $is_blacklisted;
         }
         if ($params) {
-            $sqlClause .= " WHERE ";
+            $filterClause .= " WHERE ";
             $clauses = [];
             foreach ($params as $field => $value) {
                 $clauses[] = " $field = :$field ";
             }
-            $sqlClause .= implode(' AND ', $clauses);
+            $filterClause .= implode(' AND ', $clauses);
         }
 
         // Handle pagination params
+        $paginationClause = '';
         $offset = $request->input('offset', null);
         $limit = $request->input('limit', null);
         if ($limit) {
-            $sqlClause .= ' LIMIT ' . intval($limit);
+            $paginationClause .= ' LIMIT ' . intval($limit);
         }
         if ($offset) {
-            $sqlClause .= ' OFFSET ' . intval($offset);
+            $paginationClause .= ' OFFSET ' . intval($offset);
         }
 
-        die($sqlClause);
-
-        $count = app('db')->select("SELECT COUNT(*) AS total FROM " . $this->table . $sqlClause, $params);
-        $rows = app('db')->select("SELECT * FROM " . $this->table . $sqlClause, $params);
+        $count = app('db')->select("SELECT COUNT(*) AS total FROM " . $this->table . $filterClause, $params);
+        $rows = app('db')->select("SELECT * FROM " . $this->table . $filterClause . $paginationClause, $params);
 
         return [
             'total' => $count[0]->total,
