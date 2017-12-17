@@ -61,7 +61,7 @@ class IPController extends Controller
         $rows = app('db')->select("SELECT * FROM " . $this->table . $sqlClause, $params);
 
         return [
-            'total' => $count['total'],
+            'total' => $count[0]['total'],
             'rows' => $rows
         ];
     }
