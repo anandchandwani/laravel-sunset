@@ -57,6 +57,8 @@ class IPController extends Controller
             $sqlClause .= ' OFFSET ' . intval($offset);
         }
 
+        die($sqlClause);
+
         $count = app('db')->select("SELECT COUNT(*) AS total FROM " . $this->table . $sqlClause, $params);
         $rows = app('db')->select("SELECT * FROM " . $this->table . $sqlClause, $params);
 
