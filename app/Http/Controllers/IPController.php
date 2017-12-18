@@ -49,7 +49,7 @@ class IPController extends Controller
         } elseif ($search) {
             $filterSql .= " WHERE ";
             $clauses = [];
-            foreach(['country'] as $searchableField) {
+            foreach(['country', 'redirect_url'] as $searchableField) {
                 $clauses[] = " $searchableField LIKE :search ";
             }
             $params['search'] = "%$search%";
