@@ -99,7 +99,12 @@ data-filter-show-clear="true">
                     delete ipsFilterParams[param];
             }
             $('#ipTable').bootstrapTable('refresh', {query:ipsFilterParams});
-        })
+        });
+
+        // Re-trigger the filtration after search in order to send filtration params besides the search query
+        $('#ipTable').on('search.bs.table', function(e, text){
+            $('.filter-input').trigger('change');
+        });
     });
 
 
