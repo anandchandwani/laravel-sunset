@@ -50,9 +50,9 @@ class IPController extends Controller
             $filterSql .= " WHERE ";
             $clauses = [];
             foreach(['IP', 'os', 'country', 'redirect_url'] as $searchableField) {
-                $clauses[] = " $searchableField LIKE :search ";
+                $clauses[] = " $searchableField = :search ";
             }
-            $params['search'] = "'%$search%'";
+            $params['search'] = $search;
             $filterSql .= implode(' OR ', $clauses);
         }
 
