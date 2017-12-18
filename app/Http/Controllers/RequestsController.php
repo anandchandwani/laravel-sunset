@@ -35,10 +35,10 @@ class RequestsController extends Controller
         if ($search) {
             $filterSql .= " WHERE ";
             $clauses = [];
-            foreach(['redirected_to', 'created_at'] as $searchableField) {
-                $clauses[] = " $searchableField LIKE :search ";
+            foreach(['redirected_to', 'created_at'] as $i => $searchableField) {
+                $clauses[] = " $searchableField LIKE :search$i ";
+                $params["search$i"] = "%$search%";
             }
-            $params['search'] = "%$search%";
             $filterSql .= implode(' OR ', $clauses);
         }
 
