@@ -52,7 +52,7 @@ class IPController extends Controller
             foreach(['IP', 'os', 'country', 'redirect_url'] as $searchableField) {
                 $clauses[] = " $searchableField LIKE :search ";
             }
-            $params['search'] = "%$search%";
+            $params['search'] = "$search";
             $filterSql .= implode(' OR ', $clauses);
         }
 
